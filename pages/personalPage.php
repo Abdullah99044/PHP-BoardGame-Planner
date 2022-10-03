@@ -1,0 +1,148 @@
+<?php 
+
+include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_delete_plans.php';
+ 
+$app = new App();
+$plans = new Plans();
+$delete = new Update_delelte();
+
+
+$name =    $_SESSION["user_name"];
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<script>
+    function myFunction() {
+      let result = confirm("Bennt U zeker?");
+
+        if (result == false) {
+            event.preventDefault();
+        }
+    }
+</script>
+     
+</head>
+<body>
+
+    <header class="header">
+
+    <?php include 'pageParts/header.php'; ?>
+
+    </header>
+
+    <article>
+        
+    <?php  
+
+
+    if(isset( $_SESSION["user_name"])){
+
+        ?>
+        <div>
+
+
+            <h1>Welcome  <?php  echo $name;
+            
+            
+            
+            
+            ?></h1>
+
+            <p>This page will let you edit delete and make your planning!</p>
+
+        </div>
+
+        <div>
+
+            <form action="update_user_info_page.php" method="POST">
+
+                <input type="submit" name="submit" value="Updat your password">
+                <input type='hidden' name='Type' value='password'>
+
+            </form>
+
+            <form action="update_user_info_page.php" method="POST">
+
+                <input type="submit" name="submit" value="Updat your email">
+                <input type='hidden' name='Type' value='email'>
+
+            </form>
+
+            <form action="/../../game_alpha/pages/reservePage.php" method="POST">
+
+                <input type='hidden' name='type' value='reserve'>
+                
+
+                <input type="submit" name="submit" value="Reserveren">
+
+            </form>
+            
+            <form action="" method="POST">
+
+                <input type='hidden' name='logout' value='true'>
+                
+                <input onclick="myFunction()" type="submit" name="submit" value="Log out">
+
+            </form>
+
+            <?php  
+
+            if(isset( $_POST['id'])){
+
+                $id =  $_POST['id'];
+                $delete->delete($id);
+            
+            }else{
+            
+                $id  = " ";
+            
+            }
+
+
+            if(isset( $_POST['logout'])){
+
+                $logout =  $_POST['logout'];
+                $app->logout($logout);
+            
+            }else{
+            
+                $logout  = " ";
+            
+            }
+
+
+            
+
+            $plans->readplans("personal" , "admin");
+            
+            
+            ?>
+
+        </div>
+
+        <?php }else{
+
+            echo '<h1> login pls!  </h1>';
+        }
+
+        ?>
+        
+    </article>
+
+    <footer>
+        <?php 
+
+            include 'pageParts/footer.php';
+        
+        ?>
+    </footer>
+
+    
+    
+</body>
+</html>
