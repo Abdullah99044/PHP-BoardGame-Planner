@@ -1,10 +1,10 @@
 <?php
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\planning.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
 
 
 
-class Feedback extends Plans {
+class Feedback extends App {
 
     public function feedback_insert($type){
 

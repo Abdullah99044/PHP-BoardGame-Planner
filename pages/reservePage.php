@@ -2,10 +2,12 @@
  <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansInsert.class.php';
 
-$plans = new Plans();
-$update_delete = new Update_delelte();
+$plans_insert = new PlansInsert();
+$plans_control = new PlansControl();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +50,7 @@ $update_delete = new Update_delelte();
 
   
 
-                   $row = $plans->select_game();
+                   $row = $plans_control->select_game();
 
                    foreach(   $row as $value){
                         echo $value;
@@ -80,9 +82,9 @@ $update_delete = new Update_delelte();
         
          
              
-            echo $plans->reserveren();
+            echo $plans_control->reserveren();
             
-            $plans->insert("reserve");
+            $plans_insert->insert("reserve");
 
           
             

@@ -1,15 +1,14 @@
 
  <?php
 
-
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
 
 $update_delete = new Update_delelte();
-$plans = new Plans();
+$plans_insert = new PlansInsert();
 
 $id = $_GET['id'];
+$plans_insert->insert("update");
 
-$plans->insert("update");
 ?>
 
 <!DOCTYPE html>

@@ -4,17 +4,13 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.class.php';
+include 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansView.class.php';
 
 $app = new App();
 
+$plans_view = new PlansView();
 
-
-
-
-
-
- ?>
+?>
 
 
 <!DOCTYPE html>
@@ -56,9 +52,9 @@ $app = new App();
 
         </div>
 
-        <?php $data = new Plans(); 
+        <?php  
 
-        $list = $data->readplans("everyone" , "public");
+        $list = $plans_view->readplans("everyone" , "public");
 
         foreach( $list as $value){
 

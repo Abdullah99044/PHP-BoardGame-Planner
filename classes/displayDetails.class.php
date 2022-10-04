@@ -1,11 +1,11 @@
 <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\planning.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansView.class.php';
 
 
 
-class Details extends Plans {
+class Details extends PlansView {
 
     public function read_games_details()
     {

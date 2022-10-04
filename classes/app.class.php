@@ -3,11 +3,13 @@ session_start();
 
 class App {
 
-     
+   
+  
     public  function dataBase(){
 
         return  mysqli_connect('localhost' , 'root' , 'mysql' , 'games');
     } 
+
 
     public function check_connection(){
 
@@ -37,6 +39,7 @@ class App {
                 $username = mysqli_real_escape_string($this->dataBase() ,  $userName);  
                 $password = mysqli_real_escape_string($this->dataBase() ,  $passWord);   
 
+               
                 if($this->check_connection()){
                     
                     $sql_query = "SELECT * FROM user where username='$username' AND password='$password'" ;
@@ -56,7 +59,7 @@ class App {
                             $_SESSION["login"] = TRUE ;
                              
 
-                            return header('Location: /../../game_alpha/pages/personalPage.php');
+                            return header('Location: /../../meesterproef/pages/personalPage.php');
 
                              
 
@@ -83,30 +86,13 @@ class App {
         }
     }
     
-    public function personal_nav(){
-
-        if(isset($_SESSION['user_name'])){
-            return "<h2><a href='/../../game_alpha/pages/personalPage.php'>Personal page</a></h2";
-        }
-    }
-    
-
-    public function logout($logout){
-
-        if($logout == "true"){
-            unset($_SESSION['user_name'] , $_SESSION["login"]);
-            session_destroy();
-
-            return header('Location: /../../game_alpha/index.php');
-        }
-    }
-
-    
+ 
     public function signUp(){
 
         if($_SERVER["REQUEST_METHOD"] == "POST" ){
 
             if(empty("username") && empty("password") ){
+
                 return "write something";
 
             }else{
@@ -124,7 +110,7 @@ class App {
                     $passWord = mysqli_escape_string($this->dataBase() , $passWord);
                     $email = mysqli_escape_string($this->dataBase() , $email );
 
-
+                     
 
                     if($this->check_connection()){
 
@@ -179,9 +165,23 @@ class App {
         }
     }
 
+    public function personal_nav(){
 
+        if(isset($_SESSION['user_name'])){
+            return "<h2><a href='/../../meesterproef/pages/personalPage.php'>Personal page</a></h2";
+        }
+    }
     
 
+    public function logout($logout){
+
+        if($logout == "true"){
+            unset($_SESSION['user_name'] , $_SESSION["login"]);
+            session_destroy();
+
+            return header('Location: /../../game_alpha/index.php');
+        }
+    }
 
 }
 

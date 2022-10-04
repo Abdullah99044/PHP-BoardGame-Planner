@@ -1,9 +1,10 @@
 <?php 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
+
  
-$app = new App();
-$plans = new Plans();
+$app = new App();  
+$plans_view = new PlansView();
 $delete = new Update_delelte();
 
 
@@ -118,7 +119,7 @@ $name =    $_SESSION["user_name"];
 
             
 
-            $list = $plans->readplans("personal" , "admin");
+            $list = $plans_view->readplans("personal" , "admin");
 
             foreach($list as $value){
 

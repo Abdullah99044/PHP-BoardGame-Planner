@@ -2,10 +2,10 @@
 <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\planning.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansInsert.class.php';
 
 
-class Update_delelte extends Plans{
+class Update_delelte extends PlansControl{
 
     public function update($id){
 
