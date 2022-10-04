@@ -2,7 +2,7 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_delete_plans.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
 
 $plans = new Plans();
 $update_delete = new Update_delelte();
@@ -46,11 +46,9 @@ $update_delete = new Update_delelte();
                 
                 <?php 
 
-                   $select = new select();
+  
 
-                   
-
-                   $row = $select->select();
+                   $row = $plans->select_game();
 
                    foreach(   $row as $value){
                         echo $value;
@@ -82,7 +80,7 @@ $update_delete = new Update_delelte();
         
          
              
-            echo $plans->reserve();
+            echo $plans->reserveren();
             
             $plans->insert("reserve");
 

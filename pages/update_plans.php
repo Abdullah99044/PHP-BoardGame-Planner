@@ -2,12 +2,12 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_delete_plans.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
 
 $update_delete = new Update_delelte();
 $plans = new Plans();
 
- 
+$id = $_GET['id'];
 
 $plans->insert("update");
 ?>

@@ -1,6 +1,6 @@
 <?php 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_delete_plans.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
  
 $app = new App();
 $plans = new Plans();
@@ -31,7 +31,7 @@ $name =    $_SESSION["user_name"];
 
     <header class="header">
 
-    <?php include 'pageParts/header.php'; ?>
+    <?php require 'pageParts/header.php'; ?>
 
     </header>
 
@@ -73,7 +73,7 @@ $name =    $_SESSION["user_name"];
 
             </form>
 
-            <form action="/../../game_alpha/pages/reservePage.php" method="POST">
+            <form action="/../../meesterproef/pages/reservePage.php" method="POST">
 
                 <input type='hidden' name='type' value='reserve'>
                 
@@ -142,7 +142,7 @@ $name =    $_SESSION["user_name"];
     <footer>
         <?php 
 
-            include 'pageParts/footer.php';
+        require 'pageParts/footer.php';
         
         ?>
     </footer>

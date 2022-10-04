@@ -1,9 +1,9 @@
 <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\feedback.class.php';
 
-$feedBack = new Plans();
+$feedBack = new Feedback();
 
 $type_of_feedback = $_GET['type'];
  
@@ -20,7 +20,7 @@ $feedBack->feedback_insert($type_of_feedback);
 
     <header class="header">
 
-    <?php include 'pageParts/header.php'; ?>
+    <?php require 'pageParts/header.php'; ?>
 
     </header>
 
@@ -40,7 +40,7 @@ $feedBack->feedback_insert($type_of_feedback);
     </article>
 
     <footer>
-        <?php include 'pageParts/footer.php'; ?>
+        <?php require 'pageParts/footer.php'; ?>
     </footer>
 
     

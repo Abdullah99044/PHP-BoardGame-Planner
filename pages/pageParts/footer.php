@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/../../game/style.css">
+    <link rel="stylesheet" href="/../../meesterproef/style.css">
 </head>
 <body>
 

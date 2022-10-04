@@ -4,7 +4,7 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.php';
+include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.class.php';
 
 $app = new App();
 
@@ -61,7 +61,9 @@ $app = new App();
         $list = $data->readplans("everyone" , "public");
 
         foreach( $list as $value){
+
             echo $value;
+
         }
 
        

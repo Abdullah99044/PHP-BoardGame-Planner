@@ -2,10 +2,10 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\displayDetails.class.php';
 
-$read_details = new Plans();
-
+$read_details = new Details();
+$id = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ $read_details = new Plans();
 
     <header class="header">
 
-    <?php include 'pageParts/header.php'; ?>
+    <?php require 'pageParts/header.php'; ?>
 
     </header>
 
@@ -30,14 +30,14 @@ $read_details = new Plans();
 
         <div>
 
-        <?php echo $read_details->read_game_plan(); ?>
+        <?php echo $read_details->read_game__plan($id); ?>
 
         
         </div>
     </article>
 
     <footer>
-        <?php include 'pageParts/footer.php'; ?>
+        <?php require 'pageParts/footer.php'; ?>
     </footer>
 
     

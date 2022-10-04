@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/../../game/style.css">
+    <link rel="stylesheet" href="/../../meesterproef/style.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <?php
 
         $app = new App();
-        echo $app->personal_nav() . "<br>" . '<h2><a href="/../../game_alpha/index.php">index</a></h2>';
+        echo $app->personal_nav() . "<br>" . '<h2><a href="/../../meesterproef/index.php">index</a></h2>';
 
 
     ?>

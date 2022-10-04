@@ -1,7 +1,7 @@
 <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\app.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
 
 $signUp= new App();
 

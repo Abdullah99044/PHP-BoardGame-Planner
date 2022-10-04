@@ -2,16 +2,14 @@
 <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\planning.class.php';
 
 
 class Update_delelte extends Plans{
 
     public function update($id){
 
-     
 
-         
         $username = $_SESSION["user_name"];
 
 
@@ -51,7 +49,7 @@ class Update_delelte extends Plans{
 
             if($results){
 
-                return header('Location: /../../game_alpha/pages/feedback_page.php?type=delete');
+                return header('Location: /../../meesterproef/pages/feedback_page.php?type=delete');
 
             }else{
 

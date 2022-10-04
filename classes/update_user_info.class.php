@@ -1,6 +1,6 @@
 <?php
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\app.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
 
 
 class updateData extends App{
@@ -31,7 +31,7 @@ class updateData extends App{
                 #security 
 
 
-                if($this->connecting()){
+                if($this->check_connection()){
                     
                     $query = "SELECT id FROM user where username='$username' AND password='$password'" ;
                     
@@ -78,7 +78,7 @@ class updateData extends App{
 
                 } else{
 
-                    return ' bad Connection';
+                    return $this->check_connection();
 
                 }
 
@@ -106,7 +106,7 @@ class updateData extends App{
                 
 
                 
-                if($this->connecting()){
+                if($this->check_connection()){
                     
                     $query = "SELECT id FROM user where email='$email'" ;
                     
@@ -153,7 +153,7 @@ class updateData extends App{
 
                 } else{
 
-                    return ' bad Connection';
+                    return $this->check_connection();
 
                 }
 

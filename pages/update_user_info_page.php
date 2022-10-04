@@ -1,6 +1,6 @@
 <?php 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_user_info.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_user_info.class.php';
  
 
 $updatePassword = new updateData();
@@ -52,7 +52,9 @@ $updateEmail->emailUpdate();
 
 
 
-    <?php }else{
+    <?php 
+    
+        }else{
 
         ?>
 

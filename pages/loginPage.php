@@ -2,7 +2,7 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\app.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
 
 $app = new App();
 
@@ -48,7 +48,7 @@ echo $app->login();
     </article>
 
     <footer>
-        <?php include 'pageParts/footer.php'; ?>
+        <?php require 'pageParts/footer.php'; ?>
     </footer>
 
     
