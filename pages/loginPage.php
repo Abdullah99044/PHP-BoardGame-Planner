@@ -6,7 +6,7 @@ include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\app.php';
 
 $app = new App();
 
-$app->login(); 
+echo $app->login(); 
 
  
 ?>

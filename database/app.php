@@ -64,15 +64,16 @@ class App {
 
                         }else{
 
-                            echo  "<h1> Login failed. Invalid username or password.</h1>";  
+                            return  "<h1> Login failed. Invalid username or password.</h1>";  
 
                         }
 
 
                     }else{
 
-                        echo die('Query faild!' . mysqli_error($this->dataBase()) );
                         $_SESSION["login"] = FALSE ;
+                        return die('Query faild!' . mysqli_error($this->dataBase()) );
+                        
 
                     }
                 }
@@ -83,7 +84,7 @@ class App {
     public function personal_nav(){
 
         if(isset($_SESSION['user_name'])){
-            echo "<h2><a href='/../../game_alpha/pages/personalPage.php'>Personal page</a></h2";
+            return "<h2><a href='/../../game_alpha/pages/personalPage.php'>Personal page</a></h2";
         }
     }
     
@@ -94,7 +95,7 @@ class App {
             unset($_SESSION['user_name'] , $_SESSION["login"]);
             session_destroy();
 
-            header('Location: /../../game_alpha/index.php');
+            return header('Location: /../../game_alpha/index.php');
         }
     }
 
@@ -104,7 +105,7 @@ class App {
         if($_SERVER["REQUEST_METHOD"] == "POST" ){
 
             if(empty("username") && empty("password") ){
-                echo "write something";
+                return "write something";
 
             }else{
 
@@ -135,7 +136,7 @@ class App {
                         
                         if($count == 1 ){
 
-                        echo "bad";
+                        echo "This informations already exist";
                         
 
                         }else{

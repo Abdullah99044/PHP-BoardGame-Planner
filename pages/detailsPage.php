@@ -24,13 +24,13 @@ $read_details = new Plans();
     <article>
         <div>
          
-        <?php   $read_details->read_games_details();        ?>
+        <?php   echo $read_details->read_games_details();        ?>
 
         </div>
 
         <div>
 
-        <?php $read_details->read_game_plan(); ?>
+        <?php echo $read_details->read_game_plan(); ?>
 
         
         </div>

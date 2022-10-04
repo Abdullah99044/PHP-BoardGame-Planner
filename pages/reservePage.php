@@ -46,9 +46,16 @@ $update_delete = new Update_delelte();
                 
                 <?php 
 
-                    $selectt = new select();
-                
-               
+                   $select = new select();
+
+                   
+
+                   $row = $select->select();
+
+                   foreach(   $row as $value){
+                        echo $value;
+
+                    }
                 
                
                 
@@ -73,20 +80,9 @@ $update_delete = new Update_delelte();
 
         <?php 
         
-        
-
-        
-        
-            if(isset( $_POST['type'])){
-
-                $type =  $_POST['type'];
-                
-                $_SESSION['type_for_feedback'] =  $type;
-
-                
-            }
+         
              
-            $plans->reserve();
+            echo $plans->reserve();
             
             $plans->insert("reserve");
 

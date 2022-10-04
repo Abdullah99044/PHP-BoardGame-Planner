@@ -54,8 +54,8 @@ class updateData extends App{
             
                             if($result){
             
-                                echo 'Password updated' . '<br>';
-                                header('Location: /../../game_alpha/pages/personalPage.php');
+                                return header('Location: /../../game_alpha/pages/personalPage.php');
+                                
                             }else{
             
                                 return die('Query faild!' . mysqli_error($this->dataBase()) );
@@ -129,8 +129,8 @@ class updateData extends App{
             
                             if($result){
             
-                                echo  'Email updated' . '<br>';
-                                header('Location: /../../game_alpha/pages/personalPage.php');
+                                return header('Location: /../../game_alpha/pages/personalPage.php');
+
                             }else{
             
                                 return die('Query faild!' . mysqli_error($this->dataBase()) );

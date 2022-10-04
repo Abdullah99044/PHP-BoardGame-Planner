@@ -18,11 +18,20 @@ class Update_delelte extends Plans{
         $query = "SELECT * FROM planning WHERE id='$id' AND userName='$username'";
         $results = mysqli_query($this->dataBase() , $query );
 
-        $game = mysqli_fetch_assoc($results);
+        if($results){
 
-        $game_name = $game['name'];
+            $game = mysqli_fetch_assoc($results);
 
-        $this->show_insert_boxes($game_name ,  $id ,  $username , "update" , $game);    
+            $game_name = $game['name'];
+
+            return $this->show_insert_boxes($game_name ,  $id ,  $username , "update" , $game);    
+
+        }else{
+
+            return  die('Query faild' .  mysqli_error($this->dataBase()));
+
+        }
+        
        
 
     }
@@ -37,16 +46,18 @@ class Update_delelte extends Plans{
 
  
             $query = "DELETE FROM planning WHERE  id='$id' AND userName='$username'";
+
             $results = mysqli_query($this->dataBase() , $query );
 
-            if(!$results){
-                echo die('Query faild' .  mysqli_error($this->dataBase()));
+            if($results){
 
+                return header('Location: /../../game_alpha/pages/feedback_page.php?type=delete');
+
+            }else{
+
+                return die('Query faild' .  mysqli_error($this->dataBase()));
             }
-
-        }
-
-    
+        } 
     }
 
 }

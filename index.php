@@ -58,7 +58,13 @@ $app = new App();
 
         <?php $data = new Plans(); 
 
-        $data->readplans("everyone" , "public");
+        $list = $data->readplans("everyone" , "public");
+
+        foreach( $list as $value){
+            echo $value;
+        }
+
+       
         
         ?>
 

@@ -118,7 +118,12 @@ $name =    $_SESSION["user_name"];
 
             
 
-            $plans->readplans("personal" , "admin");
+            $list = $plans->readplans("personal" , "admin");
+
+            foreach($list as $value){
+
+                echo $value;
+            }
             
             
             ?>

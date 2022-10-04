@@ -23,14 +23,22 @@ class select extends App{
 
             if($results){
 
-               while($row = mysqli_fetch_assoc($results)){
+               $games_list = [];
+           
+               while($row =  mysqli_fetch_assoc($results)){
 
-                $name = $row['name'];
+                    $name = $row['name'];
 
-                echo "<option value='$name'>$name  </option>" ;
+                    $value = "<option value='$name'>$name  </option>" ;
+
+                    array_push( $games_list ,  $value);
 
 
                }
+
+               return $games_list;
+
+               
 
             }else{
 
@@ -73,31 +81,43 @@ class Plans extends App {
 
                 }
                 
+                $html_code = "";
+
+                $html_code .= "<br> <h2> Start time : $start_time   </h2> <br> ";
+                $html_code .= "<img  src='/../../game_alpha/afbeeldingen/$image'   alt='$name_of_the_game'> ";
+                $html_code .= "<br>  <p> Game : <a href='/../../game_alpha/pages/detailsPage.php?game=$name_of_the_game&id=$id'> $name_of_the_game  </a>  <br> ";  
+                $html_code .= "<p> The orgnaiser :$name_of_the_orgnaiser    <br> " ;
+                $html_code .= "Time :  $time   <br> " ;
+                $html_code .= "Players :  ";
+
+             
+
+                foreach($players as $player){ 
+                 
+
+                    $html_code .= "<br>  $player ";
+
+                } 
                 
-                echo '<br>' . "<h2> Start time : $start_time </h2>" . '<br>';
-                echo "<img src='/../../game_alpha/afbeeldingen/$image' alt='$name_of_the_game'>";
-                echo '<br>' . "<p> Game : <a href='/../../game_alpha/pages/detailsPage.php?game=$name_of_the_game&id=$id'> $name_of_the_game </a>" . '<br>';
-                echo  "<p> The orgnaiser : $name_of_the_orgnaiser  " . '<br>';
-                echo "Time : $time " . '<br>';
-                echo " Players : ";
+              
 
-                foreach($players as $player){
-                    echo  '<br>' . $player ;
-                }
-                echo "</p>";
+                $html_code .= "</p>  ";
+ 
 
-                if($type == "admin"){
+                if($type == "admin"){  
 
                     
-                    echo "<a href='/../../game_alpha/pages/update_plans.php?id=$id&type=update'> Update </a>";
-                    echo '<form action="" method="POST">' ;
-                    echo "<input type='hidden' name='id' value='$id'>" ;
-                    echo '<input onclick="myFunction()" type="submit" name="submit" value="delete">';
-                    echo '  </form>';
+                    $html_code .= "<a href='/../../game_alpha/pages/update_plans.php?id=$id&type=update'> Update </a> "; 
+                    $html_code .= "<form action='' method='POST'> ";  
+                    $html_code .= "<input type='hidden' name='id' value='$id'> ";  
+                    $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
+                    $html_code .= "</form>  ";
+
+                    
                 }
                 
 
-                 
+                return  $html_code;
             
             }else{
 
@@ -117,6 +137,8 @@ class Plans extends App {
             $query = "SELECT id FROM planning";
 
             $results = mysqli_query($this->dataBase() , $query );
+
+            $plans_list = [];
         
             while($row = mysqli_fetch_assoc($results)){
 
@@ -144,31 +166,38 @@ class Plans extends App {
     
                             if($results_3){
     
-                                $this->show_plans( $results_3 , $type );
+                                array_push($plans_list , $this->show_plans( $results_3 , $type ));
     
                             }else{
     
-                                echo die('Query failed!' . mysqli_error($this->dataBase()));
+                                return die('Query failed!' . mysqli_error($this->dataBase()));
                             }
 
                         }
                        
                     }else{
 
-                        echo  die('Query failed!' . mysqli_error($this->dataBase()));
+                        return  die('Query failed!' . mysqli_error($this->dataBase()));
                     } 
 
+
                     $id++;
+
+                    
     
                 }
 
 
+
             }
+
+            return $plans_list ;
             
         }else{
 
             $query1 = "SELECT id FROM planning ";
             $results1 = mysqli_query($this->dataBase() , $query1 );
+            $plans_list = [];
 
             if($results1){
 
@@ -179,15 +208,19 @@ class Plans extends App {
                     $query = "SELECT * FROM planning WHERE id='$ids'";
                     $results = mysqli_query($this->dataBase() , $query );
         
-                    $this->show_plans($results ,  $ids);
-
+               
+                    array_push($plans_list , $this->show_plans($results ,  $ids));
 
 
                  }
-        
+                 
+                return  $plans_list; 
        
 
-             }
+            }else{
+
+                return  die('Query failed!' . mysqli_error($this->dataBase()));
+            } 
 
         }
     }
@@ -209,19 +242,17 @@ class Plans extends App {
 
                 if($this->connecting()){
 
-                    $this->show_insert_boxes($select , "" , "" , "" , "" );
+                    return $this->show_insert_boxes($select , "" , "" , "" , "" );
 
-                    }else{
+                }else{
 
-                        die('Query faild!' . mysqli_error($this->dataBase()) );
-
-                    }
-            
+                    return die('Query faild!' . mysqli_error($this->dataBase()) );
 
                 }
             }
         }
-     
+    }
+    
 
 
     public function show_insert_boxes($select , $id , $userName , $type , $game_update ){
@@ -253,50 +284,62 @@ class Plans extends App {
         $result = mysqli_query( $this->dataBase() , $query );
         $row = mysqli_fetch_assoc($result);
 
-        
-        $maxPlayers = $row['max_players'];
+        if($result){
+
+            $maxPlayers = $row['max_players'];
 
 
-        $players = (string) $maxPlayers;
-        $_SESSION["numPlayers"] = $players;
-
-        $img = $row['image'];
-
-        $playTime = $row['play_minutes'] + $row['explain_minutes'];
-
-        $num = 1;
-        $player_num = 0;
-        
-        echo "<input type='hidden' name='id'  value=$game_id >";
-        echo "<label>Name of the explain player : </label>"  . "<input type='text' name='maker' value='$maker' required>" . '<br>';
-
-        echo  "<label>Start time : </label>" .  "<input type='time'  value='$time' name='time' required>" . '<br>' ;
-
-
-        for($i = 0 ; $i < $maxPlayers ; $i++){
-
-            $numString =  (string) $num;
-
-            
-            ?> 
-
-            <br> <label>Player $num : </label>  <input required  type='text' value='<?php echo $game_players[$player_num]; ?>' <?php echo "name='player$numString'" ?> >"   
-            
-            <?php
-
-            $num++;
-            $player_num++;
-            
-        }
-
-        echo   "<br>" . $game_id . " = " . " id ";
-        
-      
-        
-
-       
-        
+            $players = (string) $maxPlayers;
+            $_SESSION["numPlayers"] = $players;
     
+            $img = $row['image'];
+    
+            $playTime = $row['play_minutes'] + $row['explain_minutes'];
+    
+            $num = 1;
+            $player_num = 0;
+            
+            $html_code = " ";
+    
+            $html_code .= "<input type='hidden' name='id'  value='$game_id'  > ";
+    
+            $html_code .= "<label> Name of the explain player : </label> "  ;
+            
+            $html_code .= "<input type='text' name='maker' value='$maker' required>  <br> ";
+    
+            $html_code .= "<label>Start time : </label> "; 
+            
+            $html_code .= "<input type='time'  value='$time' name='time' required>   " ;
+    
+    
+            
+    
+            for($i = 0 ; $i < $maxPlayers ; $i++){
+    
+                $numString =  (string) $num;
+    
+                
+           
+    
+                $html_code .= "<br> <label>Player $num : </label>  <input required  type='text' value='$game_players[$player_num]'   name='player$numString'> "  ;
+                
+               
+    
+                $num++;
+                $player_num++;
+                
+            }
+    
+            return  $html_code;
+
+
+        }else{
+
+            return  die('Query faild' .  mysqli_error($this->dataBase()));
+
+
+        }
+       
     }
 
     public function insert($type){
@@ -386,15 +429,20 @@ class Plans extends App {
                         $result = mysqli_query($this->dataBase() ,  $query);
     
                         if(!$result){
-                            echo die('Query faild' .  mysqli_error($this->dataBase()));
+                            return die('Query faild' .  mysqli_error($this->dataBase()));
                         }
     
                         $num++;
                     } 
                     
                     if($result){
-                        echo "Goood! we recived your plan.";
-                        header('Location: /../../game_alpha/pages/feedback_page.php');
+                         
+                        return header('Location: /../../game_alpha/pages/feedback_page.php?type=update');
+
+                    }else{
+
+                        return  die('Query faild' .  mysqli_error($this->dataBase()));
+
                     }
                          
                 }else{
@@ -403,10 +451,13 @@ class Plans extends App {
                     $result = mysqli_query($this->dataBase() ,  $query);
 
                     if(!$result){
-                        echo  die('Query faild' .  mysqli_error($this->dataBase()));
+
+                        return  die('Query faild' .  mysqli_error($this->dataBase()));
+
                     }else{
 
-                        header('Location: /../../game_alpha/pages/feedback_page.php');
+                        return header('Location: /../../game_alpha/pages/feedback_page.php?type=update');
+
                     }
                 }
             
@@ -455,13 +506,15 @@ class Plans extends App {
 
 
           
+            $details = "";
+            $details .= "<h2> $name_of_the_game </h2> <br> ";
+            $details .=  "<img src='/../../game/afbeeldingen/$image' alt=$name_of_the_game > ";
+            $details .=  "<br>  $youtube  <p> $description  <br> <a href='$url'> to the game </a>  <br>  ";
+            $details .=  "Expansions : $expansions Skills : $skills <br> Min players : $min_players ";
+            $details .=  " <br> Max players : $max_players <br>  Explain minutes :  $explain_minutes  ";
+            $details .= "<br> Play minutes : $play_minutes </p> ";
 
-            echo "<h2> $name_of_the_game </h2>" . '<br>';
-            echo "<img src='/../../game/afbeeldingen/$image' alt='$name_of_the_game'>";
-            echo "<br>" . $youtube . "<p> $description " . '<br>' . "<a href='$url'> to the game </a>" .  '<br>';
-            echo "Expansions : $expansions" . '<br>' . "Skills : $skills " . '<br>' . "Min players : $min_players";
-            echo  '<br>' . "Max players : $max_players" . '<br>' . " Explain minutes : '$explain_minutes'";
-            echo '<br>' . "Play minutes : $play_minutes" . "</p>";
+            return $details;
 
         }else{
 
@@ -489,13 +542,15 @@ class Plans extends App {
             $players = explode("," ,  $players);
 
 
-
-           echo "<p> Game start at : $start_time " . "<br>"   . "Maker : $explain_player" . "<br>" ;
-           echo "Players are : " ;
+            $html_code = "";
+            $html_code .= "<p> Game start at : $start_time  <br> Maker : $explain_player <br> " ;
+            $html_code .=  "Players are : " ;
            foreach($players as $player){
-                echo "<br>" . $player ;
+            $html_code .= "<br>  $player " ;
            }
-           echo "</p>";
+           $html_code .= "</p> ";
+
+           return  $html_code;
             
         
     
@@ -514,13 +569,13 @@ class Plans extends App {
     }
 
 
-    public function feedback_insert(){
+    public function feedback_insert($type){
 
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             $userName = $_SESSION["user_name"] ;
-            $type =  $_SESSION['type_for_feedback'] ;
+            $type = $type ;
 
             $feedBack = $_POST['feedback'];
 
@@ -533,10 +588,10 @@ class Plans extends App {
 
             if($result){
 
-                header('Location: /../../game_alpha/pages/personalPage.php');
+                return header('Location: /../../game_alpha/pages/personalPage.php');
             }else{
 
-                echo die("Query failed! " . mysqli_error($this->dataBase()));
+                return die("Query failed! " . mysqli_error($this->dataBase()));
             }
 
         }

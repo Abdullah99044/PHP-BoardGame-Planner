@@ -5,7 +5,7 @@ include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\app.php';
 
 $signUp= new App();
 
-$signUp->signUp();
+echo $signUp->signUp();
 
  
 ?>

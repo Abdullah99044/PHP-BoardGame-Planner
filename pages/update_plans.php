@@ -7,8 +7,7 @@ include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\update_delete_pla
 $update_delete = new Update_delelte();
 $plans = new Plans();
 
-$id =  $_GET['id']; 
-echo  $id  . " = id " . "<br>";
+ 
 
 $plans->insert("update");
 ?>
@@ -50,7 +49,7 @@ $plans->insert("update");
         
 
              
-            $update_delete->update($id);
+            echo $update_delete->update($id);
 
                 
                 

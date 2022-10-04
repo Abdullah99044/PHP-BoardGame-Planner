@@ -5,8 +5,9 @@ include 'C:\Program Files\ammps2\Ampps\www\game_alpha\database\planning.php';
 
 $feedBack = new Plans();
 
+$type_of_feedback = $_GET['type'];
  
-$feedBack->feedback_insert();
+$feedBack->feedback_insert($type_of_feedback);
 
 ?>
 
