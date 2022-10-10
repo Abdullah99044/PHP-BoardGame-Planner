@@ -4,13 +4,15 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\filter.class.php';
 
 $app = new App();
 
 $plans_view = new PlansView();
 
 $plans_cintrol = new PlansControl();
+
+$filter = new Filter();
 
 ?>
 
@@ -56,19 +58,37 @@ $plans_cintrol = new PlansControl();
 
         <?php  
 
-        echo $plans_view->select_type_of_games();
+        ####################################### filter ########################################
 
-        print_r($plans_cintrol->filter()) ;
+        echo $filter->select_type_of_games(); # Kies een welke  spelen tijd wil je.
+
+        $list_filter = $filter->filter_control() ; # Functie filter_control heeft twee uitkomst "false" of een lijst
+
+        #######################################################################################
+
 
         $list = $plans_view->readplans("everyone" , "public");
 
-        foreach( $list as $value){
+        if($filter->filter_control() == false){
 
-            echo $value;
+            foreach( $list as $value){
+
+                echo $value;
+
+            }
+
+        }else{
+
+            foreach( $list_filter as $value){
+
+                echo $value;
+
+            }
+        
 
         }
 
-       
+      
         
         ?>
 

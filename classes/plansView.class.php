@@ -209,48 +209,7 @@ class PlansView extends PlansInsert {
         }
     }
 
-    public function select_type_of_games(){
-
-        $game_types= ["40 minuten spelletjes " => 40 , "45 minuten spelletjes " => 45 , "60 minuten spelletjes " => 60 , "minder dan 40 minuten spelletjes " => "minder_dan_40"];
-        
-        $htm_code = " ";
-
-        $htm_code .= "<form  method='POST' action='' > ";
-
-        $htm_code .=  "<select name='games_type' > ";
-
-
-        foreach($game_types as $item => $value){
-
-             
-
-            $htm_code .= "<option value='$value'> $item </option> "; 
-
-            
-        }
-
-                  
-
-        $htm_code .=  "</select> ";
-
-        $htm_code .=  "<input type='hidden' name='filter_onn' value='true' > ";
-
-        $htm_code .=  "<input type='submit' value='select' name'submit' > ";
-
-        $htm_code .=  "</form> ";
-
-        $htm_code .= " <form  method='POST' action='' > ";
-
-        $htm_code .=  "<input type='hidden' name='filter_off' value='false' > ";
-
-        $htm_code .=  "<input type='submit' value='resest' name'submit' > ";
-
-        $htm_code .=  "</form> ";
-
-        return $htm_code;
-
-    }
-
+    
 
 }
 

@@ -172,37 +172,7 @@ class PlansInsert extends App {
         }
     }
 
-    public function filter_games_model($time){
-
-        if($time == 40)
-        {
-            $time = 40;
-            $query = "SELECT * FROM games WHERE play_minutes < '$time'";
-            $result = mysqli_query($this->dataBase() , $query);
-
-        }        
-        
-        
-     
-        
-        $list = [];
-
-        if($result){
-
-            while($row = mysqli_fetch_array($result)){
-
-                $row_name = $row['name'];
-                array_push( $list , $row_name);
-
-            }
-
-            return $list;
-
-        }else{
-            return  die('Query faild' .  mysqli_error($this->dataBase()));
-        }
-
-    }
+   
 }
 
 

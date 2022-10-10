@@ -186,33 +186,7 @@ class PlansControl extends PlansView {
     }
 
 
-    public function filter(){
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-            $type_of_game = $filter_off = $filter_onn = " ";
-
-            if(isset($_POST['filter_off'])){
-                $filter_off = $_POST['filter_off'];
-                return $type_of_game = $filter_off;
-                
-            }
-
-            if(isset($_POST['filter_onn'])){
-
-                $filter_onn = $_POST['filter_onn'] ;
-                $type_of_game = $_POST['games_type'] . " " .  $filter_onn ;
-
-                return $this->filter_games_model($type_of_game);
-                
-               
-            }
-
-          
-
-            return  $type_of_game;
-        }
-    }
+    
 
    
 }
