@@ -2,27 +2,27 @@
 <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansInsert.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
 
 
 class Update_delelte extends PlansControl{
 
     public function update($id){
 
-
         $username = $_SESSION["user_name"];
+        $user_id = $this->select_user_id();
 
 
-        $query = "SELECT * FROM planning WHERE id='$id' AND userName='$username'";
+        $query = "SELECT * FROM planning WHERE id='$id' AND userID='$user_id'";
         $results = mysqli_query($this->dataBase() , $query );
 
         if($results){
 
             $game = mysqli_fetch_assoc($results);
 
-            $game_name = $game['name'];
+            $game_name = $game['Game_ID'];
 
-            return $this->show_insert_boxes($game_name ,  $id ,  $username , "update" , $game);    
+            return $this->show_insert_boxes($game_name ,  $id  ,  $username ,"update" , $game);    
 
         }else{
 
@@ -39,11 +39,11 @@ class Update_delelte extends PlansControl{
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            $id = $id;
-            $username = $_SESSION["user_name"];
+             
+            $user_id = $this->select_user_id();
 
  
-            $query = "DELETE FROM planning WHERE  id='$id' AND userName='$username'";
+            $query = "DELETE FROM planning WHERE  id='$id' AND userID='$user_id'";
 
             $results = mysqli_query($this->dataBase() , $query );
 

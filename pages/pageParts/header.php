@@ -19,10 +19,12 @@
     <?php
 
         $app = new App();
-        echo $app->personal_nav() . "<br>" . '<h2><a href="/../../meesterproef/index.php">index</a></h2>';
+        echo $app->personal_nav()  .   "<br>"    ;
 
 
     ?>
+
+   <a class='navButtons' href='/../../meesterproef/index/'>index </a> 
 
    
     

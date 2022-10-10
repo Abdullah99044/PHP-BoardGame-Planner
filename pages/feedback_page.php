@@ -26,6 +26,8 @@ $feedBack->feedback_insert($type_of_feedback);
 
     <article>
         <div>
+
+        <?php print_r($feedBack->select_user_id()); ?>
          
          <form  method="POST" action="" >
     

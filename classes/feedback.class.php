@@ -12,7 +12,7 @@ class Feedback extends App {
 
             if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-                $userName = $_SESSION["user_name"] ;
+                $id = $this->select_user_id();
                 $type = $type ;
     
                 $feedBack = $_POST['feedback'];
@@ -20,16 +20,19 @@ class Feedback extends App {
                 $feedBack = mysqli_real_escape_string($this->dataBase() ,   $feedBack  );
     
     
-                $query =  "INSERT INTO feedback( username , feedback , type ) VALUES('$userName' , '$feedBack' , '$type')";
+                $query =  "INSERT INTO feedback( userId , feedback , type ) VALUES( $id , '$feedBack' , '$type')";
                 
                 $result = mysqli_query($this->dataBase() , $query);
     
                 if($result){
+
+
     
                     return header('Location: /../../game_alpha/pages/personalPage.php');
                 }else{
-    
-                    return die("Query failed! " . mysqli_error($this->dataBase()));
+                    
+                       
+                    return $result . die("Query failed! " . mysqli_error($this->dataBase()));
                 }
     
             }

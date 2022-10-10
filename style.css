@@ -8,7 +8,7 @@
  
 header , footer{
      
-    color: white;
+    color: black;
     margin-top: 0px;
     background-color: black;   
     padding: 10 0;
@@ -22,6 +22,17 @@ header , footer{
     font-style: italic;
     text-align: center;
     font-size: 80px;
+}
+
+.navButton{
+
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
 }
 
  

@@ -1,8 +1,33 @@
 <?php 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
 
 class PlansInsert extends App {
+
+    public function players_insert($players , $id){
+  
+            $player_num = 0 ;
+            
+            foreach($players as $player){
+
+                $query = "INSERT INTO players(name , plan_id) VALUES('$players[$player_num]' ,  '$id') ";
+                $result = mysqli_query($this->dataBase() ,    $query );
+        
+                if($result){
+                    echo "good";
+                }else{
+
+                    echo die('Query faild' .  mysqli_error($this->dataBase()));
+                }
+
+                echo  $player_num;
+                $player_num++;
+
+
+            }
+
+            return header('Location: /../../meesterproef/pages/personalPage.php');
+    }
 
     public function insert($type){
 
@@ -12,11 +37,10 @@ class PlansInsert extends App {
             if(!empty($_POST["maker"]) && !empty($_POST["time"])){
 
                
-                $username = $_SESSION["user_name"];;
+                $user_id =  $this->select_user_id();
 
-                $userName = mysqli_real_escape_string($this->dataBase() ,$username);
-                 #Het naam van de speler die zal uitlig geven over het spel
-
+                 
+ 
                 $person_who_explains_game = $_POST["maker"];
                 $person_who_explains_game = mysqli_real_escape_string($this->dataBase() , $person_who_explains_game);
 
@@ -37,7 +61,9 @@ class PlansInsert extends App {
 
                 $number_of_players = $_SESSION["numPlayers"] ; #Deze variable bewaart de aantal van de spelers van class inputData
 
-                $game_Name =  $_SESSION["game"] ;
+                $game_Name = $_POST['game_name'];
+
+                $game_id = $_POST['game_id'];
 
                 $number_of_players = (int)  $number_of_players; 
 
@@ -66,9 +92,10 @@ class PlansInsert extends App {
 
                 }
 
-                $players = implode("," , $players );
-                $players = mysqli_real_escape_string($this->dataBase() ,  $players );
-                
+               
+
+                 
+                 
 
                 $id = $_POST["id"];
 
@@ -77,8 +104,8 @@ class PlansInsert extends App {
                         $id = $id;
                         
 
-                        $data = [ $game_Name , $person_who_explains_game , $startTime , $players , $userName ];
-                        $coloumn = [ 'name' , 'makerName' , 'startTime' , 'players' , 'userName' ];
+                        $data = [ $game_Name , $person_who_explains_game , $startTime , $user_id ];
+                        $coloumn = [ 'name' , 'makerName' , 'startTime' , 'userID' ];
         
                         $num = 0;    
         
@@ -110,7 +137,7 @@ class PlansInsert extends App {
                             
                     }else{
 
-                        $query = "INSERT INTO planning(name , makerName , startTime , players , userName) VALUES('$game_Name' , '$person_who_explains_game' , '$startTime' , '$players' , '$userName')";
+                        $query = "INSERT INTO planning(name , makerName , startTime , userID , Game_ID ) VALUES('$game_Name' , '$person_who_explains_game' , '$startTime' , '$user_id' , '$game_id')";
                         $result = mysqli_query($this->dataBase() ,  $query);
 
                         if(!$result){
@@ -119,7 +146,21 @@ class PlansInsert extends App {
 
                         }else{
 
-                            return header('Location: /../../meesterproef/pages/feedback_page.php?type=update');
+                            $query_1 = "SELECT * FROM planning WHERE  makerName='$person_who_explains_game' AND  userID='$user_id' AND startTime='$startTime' AND Game_ID='$game_id'";
+                            $result_1 =  mysqli_query($this->dataBase() ,  $query_1);
+
+                            if($result_1){
+
+                                $row = mysqli_fetch_assoc($result_1);
+                                $id = $row['id'];
+
+                                $this->players_insert($players , $id );
+
+                                return header('Location: /../../meesterproef/pages/feedback_page.php?type=update');
+                                
+                            }else{
+                                return  die('Query faild' .  mysqli_error($this->dataBase()));
+                            }
 
                         }
                     }
@@ -129,6 +170,38 @@ class PlansInsert extends App {
                 }
             }
         }
+    }
+
+    public function filter_games_model($time){
+
+        if($time == 40)
+        {
+            $time = 40;
+            $query = "SELECT * FROM games WHERE play_minutes < '$time'";
+            $result = mysqli_query($this->dataBase() , $query);
+
+        }        
+        
+        
+     
+        
+        $list = [];
+
+        if($result){
+
+            while($row = mysqli_fetch_array($result)){
+
+                $row_name = $row['name'];
+                array_push( $list , $row_name);
+
+            }
+
+            return $list;
+
+        }else{
+            return  die('Query faild' .  mysqli_error($this->dataBase()));
+        }
+
     }
 }
 

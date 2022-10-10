@@ -3,7 +3,7 @@
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansView.class.php';
 
 
-class PlansControl extends App {
+class PlansControl extends PlansView {
 
     public function select_game()
     {   
@@ -11,7 +11,7 @@ class PlansControl extends App {
         if($this->check_connection()){
 
             
-            $query = "SELECT name FROM games";
+            $query = "SELECT * FROM games";
 
             $results = mysqli_query($this->dataBase() , $query );
 
@@ -22,10 +22,11 @@ class PlansControl extends App {
                 while($row =  mysqli_fetch_assoc($results)){
 
                     $name = $row['name'];
+                    $id = $row['id'];
 
-                    $value = "<option value='$name'>$name  </option>" ;
+                    $value = "<option value='$id'>$name  </option>" ;
 
-                    array_push( $games_list ,  $value);
+                    array_push( $games_list ,  $value );
 
                 }
 
@@ -57,8 +58,7 @@ class PlansControl extends App {
 
             $maker = $game['makerName'];
             $time = $game['startTime'];
-            $game_players = $game['players'];
-            $game_players = explode("," ,  $game_players);
+            
 
             $_SESSION["game"] =  $select;
 
@@ -67,7 +67,7 @@ class PlansControl extends App {
 
         if($this->check_connection()){
 
-            $query = "SELECT * FROM games where name='$select'" ;    
+            $query = "SELECT * FROM games where id='$select'" ;    
             $result = mysqli_query( $this->dataBase() , $query );
             $row = mysqli_fetch_assoc($result);
 
@@ -85,28 +85,43 @@ class PlansControl extends App {
         
                 $num = 1;
                 $player_num = 0;
+
+                $game_name = $row['name'];
                 
                
         
                 $html_code .= "<label> Name of the explain player : </label> "  ;
+
+                $html_code .= "<input type='hidden' name='game_name' value='$game_name' >  <br> ";
+
+                $html_code .= "<input type='hidden' name='game_id' value='$select' >  <br> ";
                 
                 $html_code .= "<input type='text' name='maker' value='$maker' required>  <br> ";
         
                 $html_code .= "<label>Start time : </label> "; 
                 
                 $html_code .= "<input type='time'  value='$time' name='time' required>   " ;
+
+
         
-        
+                 
+                $results_players =   $this->select_players($id);
+
                 
-        
                 for($i = 0 ; $i < $maxPlayers ; $i++){
         
                     $numString =  (string) $num;
-        
                     
-            
+                    $row_players = mysqli_fetch_assoc($results_players);
+                    
+                    $row_name_player = " ";
+                   
+                    if(!empty($row_players)){
+                        $row_name_player = $row_players['name'];
+
+                    }
         
-                    $html_code .= "<br> <label>Player $num : </label>  <input required  type='text' value='$game_players[$player_num]'   name='player$numString'> "  ;
+                    $html_code .= "<br> <label>Player $num : </label>  <input required  type='text' value='$row_name_player'   name='player$numString'> "  ;
                     
                 
         
@@ -143,7 +158,7 @@ class PlansControl extends App {
                 
 
                 $select = $_POST['gameName'];
-                $_SESSION["game"] =  $select;
+               
             
 
                 if($this->check_connection()){
@@ -156,6 +171,46 @@ class PlansControl extends App {
 
                 }
             }
+        }
+    }
+
+    public function plans_update_delete($id){
+        $html_code = " ";
+        $html_code .= "<a href='/../../meesterproef/pages/update_plans.php?id=$id&type=update'> Update </a> "; 
+        $html_code .= "<form action='' method='POST'> ";  
+        $html_code .= "<input type='hidden' name='id' value='$id'> ";  
+        $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
+        $html_code .= "</form>  ";
+
+        return $html_code;
+    }
+
+
+    public function filter(){
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $type_of_game = $filter_off = $filter_onn = " ";
+
+            if(isset($_POST['filter_off'])){
+                $filter_off = $_POST['filter_off'];
+                return $type_of_game = $filter_off;
+                
+            }
+
+            if(isset($_POST['filter_onn'])){
+
+                $filter_onn = $_POST['filter_onn'] ;
+                $type_of_game = $_POST['games_type'] . " " .  $filter_onn ;
+
+                return $this->filter_games_model($type_of_game);
+                
+               
+            }
+
+          
+
+            return  $type_of_game;
         }
     }
 

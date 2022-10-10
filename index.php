@@ -4,11 +4,13 @@
  <?php
 
 
-include 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansView.class.php';
+include 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
 
 $app = new App();
 
 $plans_view = new PlansView();
+
+$plans_cintrol = new PlansControl();
 
 ?>
 
@@ -40,12 +42,12 @@ $plans_view = new PlansView();
         <form action='pages/loginPage.php' method='POST'> 
 
                 
-            <input type='submit' value='login'>
+            <input   type='submit' value='login'>
         </form> 
 
         <form action='pages/signUppage.php' method='POST'>;
 
-            <input type='submit' value='signUp'> 
+            <input   type='submit' value='signUp'> 
     
         </form> 
 
@@ -53,6 +55,10 @@ $plans_view = new PlansView();
         </div>
 
         <?php  
+
+        echo $plans_view->select_type_of_games();
+
+        print_r($plans_cintrol->filter()) ;
 
         $list = $plans_view->readplans("everyone" , "public");
 

@@ -2,7 +2,7 @@
  <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansInsert.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
 
 $plans_insert = new PlansInsert();
 $plans_control = new PlansControl();
@@ -84,7 +84,7 @@ $plans_control = new PlansControl();
              
             echo $plans_control->reserveren();
             
-            $plans_insert->insert("reserve");
+            echo $plans_insert->insert("reserve");
 
           
             

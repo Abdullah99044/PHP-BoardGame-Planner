@@ -166,10 +166,15 @@ class App {
     }
 
     public function personal_nav(){
+        $html_code = " ";
+
+     
 
         if(isset($_SESSION['user_name'])){
-            return "<h2><a href='/../../meesterproef/pages/personalPage.php'>Personal page</a></h2";
+            $html_code .= "<h2><a href='/../../meesterproef/pages/personalPage.php'>Personal page</a></h2";
         }
+
+        return $html_code;
     }
     
 
@@ -182,6 +187,41 @@ class App {
             return header('Location: /../../game_alpha/index.php');
         }
     }
+
+    public function select_user_id(){
+
+        $username = $_SESSION["user_name"];
+        
+        $query = "SELECT id FROM user WHERE username = '$username' ";
+
+        $result = mysqli_query($this->dataBase() , $query );
+
+        if($result){
+
+            $row = mysqli_fetch_assoc($result);
+
+            $row_id = $row['id'];
+
+            return $row_id ;
+        }else{
+            return die('Query faild' .  mysqli_error($this->dataBase()));
+        }
+    }
+
+    public function select_players($id){
+
+        $query = "SELECT * FROM players WHERE plan_id='$id'";
+        $results =   mysqli_query($this->dataBase() ,  $query  );
+
+        if($results){
+            return $results;
+        }else{
+            return die('Query faild' .  mysqli_error($this->dataBase()));
+        }
+
+    }
+
+   
 
 }
 

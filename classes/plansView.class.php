@@ -2,11 +2,10 @@
 
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansInsert.class.php';
 
 
-
-class PlansView extends App {
+class PlansView extends PlansInsert {
 
    #This fuctions will display the game plans for users
 
@@ -21,9 +20,7 @@ class PlansView extends App {
                 $name_of_the_orgnaiser = $game['makerName'];
 
                 $id =  $game['id'];
-
-                $players = $game['players'];
-                $players = explode("," ,  $players);
+ 
 
 
                 $query_image_time = "SELECT image , play_minutes , explain_minutes  FROM games WHERE name='$name_of_the_game' ";
@@ -46,7 +43,7 @@ class PlansView extends App {
 
                 if($type_display == "read_plans"){
 
-                    $html_code .= "<img  src='/../../meesterproef/afbeeldingen/$image'   alt='$name_of_the_game'> ";
+                    $html_code .= "<a href='/../../meesterproef/pages/detailsPage.php?game=$name_of_the_game&id=$id'> <img  src='/../../meesterproef/afbeeldingen/$image'   alt='$name_of_the_game'>  </a>  ";
                     $html_code .= "<br>  <p> Game : <a href='/../../meesterproef/pages/detailsPage.php?game=$name_of_the_game&id=$id'> $name_of_the_game  </a>  <br> ";  
                 }
 
@@ -54,29 +51,29 @@ class PlansView extends App {
                 $html_code .= "Time :  $time   <br> " ;
                 $html_code .= "Players :  ";
 
-             
 
-                foreach($players as $player){ 
-                 
+              
+                
+                $results = $this->select_players($id);
 
-                    $html_code .= "<br>  $player ";
-
-                } 
+                while($row = mysqli_fetch_assoc($results)){
+                    $name =  $row['name'];
+                    $html_code .= " <br>  $name ";
+                }
+ 
                 
               
 
                 $html_code .= "</p>  ";
- 
+                
+                $update_delete = new PlansControl();
+
 
                 if($type_user == "admin"){  
 
                     
-                    $html_code .= "<a href='/../../meesterproef/pages/update_plans.php?id=$id&type=update'> Update </a> "; 
-                    $html_code .= "<form action='' method='POST'> ";  
-                    $html_code .= "<input type='hidden' name='id' value='$id'> ";  
-                    $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
-                    $html_code .= "</form>  ";
-
+                    $html_code .= $update_delete->plans_update_delete($id);
+                     
                     
                 }
                 
@@ -124,13 +121,14 @@ class PlansView extends App {
 
                             $row_name = mysqli_fetch_assoc($results_2);
 
-                            $username_row = $row_name['userName'];
+                            $username_row = $row_name['userID'];
+                            $user_id = $this->select_user_id();
 
                             if( $results_2){
 
-                                if($username_row == $username){
+                                if($username_row == $user_id){
 
-                                    $query_3 = "SELECT * FROM planning WHERE id='$id' AND userName='$username'";
+                                    $query_3 = "SELECT * FROM planning WHERE id='$id' AND userID='$user_id'";
 
                                     $results_3 = mysqli_query($this->dataBase() , $query_3 );
             
@@ -209,6 +207,48 @@ class PlansView extends App {
 
             return $this->check_connection();
         }
+    }
+
+    public function select_type_of_games(){
+
+        $game_types= ["40 minuten spelletjes " => 40 , "45 minuten spelletjes " => 45 , "60 minuten spelletjes " => 60 , "minder dan 40 minuten spelletjes " => "minder_dan_40"];
+        
+        $htm_code = " ";
+
+        $htm_code .= "<form  method='POST' action='' > ";
+
+        $htm_code .=  "<select name='games_type' > ";
+
+
+        foreach($game_types as $item => $value){
+
+             
+
+            $htm_code .= "<option value='$value'> $item </option> "; 
+
+            
+        }
+
+                  
+
+        $htm_code .=  "</select> ";
+
+        $htm_code .=  "<input type='hidden' name='filter_onn' value='true' > ";
+
+        $htm_code .=  "<input type='submit' value='select' name'submit' > ";
+
+        $htm_code .=  "</form> ";
+
+        $htm_code .= " <form  method='POST' action='' > ";
+
+        $htm_code .=  "<input type='hidden' name='filter_off' value='false' > ";
+
+        $htm_code .=  "<input type='submit' value='resest' name'submit' > ";
+
+        $htm_code .=  "</form> ";
+
+        return $htm_code;
+
     }
 
 
