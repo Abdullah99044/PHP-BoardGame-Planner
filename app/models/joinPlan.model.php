@@ -55,11 +55,11 @@ class JoinPlan_model {
 
         if($count > 0){
 
-            return false;
+            return true;
 
         }else{
 
-            return true;
+            return false;
         }
 
 

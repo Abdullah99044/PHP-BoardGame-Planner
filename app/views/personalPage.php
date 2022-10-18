@@ -9,7 +9,7 @@ App::check_login();
 
 
 
-UpdateDelete::delete( );
+UpdateDelete::delete(); 
 
 
 $name =    $_SESSION["user_name"];

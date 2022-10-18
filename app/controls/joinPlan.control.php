@@ -10,64 +10,67 @@ class JoinPlan_control {
 
     
 
-    public static function joinPlan($plan_id  , $name){
+    public static function joinPlan($plan_id  , $game_name){
 
 
-        if(isset($plan_id , $name)){
+        if(isset($plan_id , $game_name)){
 
-
-            $maxPlayers = JoinPlan_model::maxPlayer($name);
-
-
-            $planer_id = App::select_plan_user_id($plan_id);
-            $user_id = App::select_user_id();
+            $max_players =  JoinPlan_model::maxPlayer($game_name);
+            $planer_id   =  App::select_plan_user_id($plan_id);
+            $user_id     =  App::select_user_id();
 
             if($planer_id !=  $user_id){
 
+                $is_full = JoinPlan_model::join_bolean($plan_id ,$max_players);
 
-                $result = JoinPlan_model::join_bolean($plan_id ,$maxPlayers);
+                if($is_full == "not full"){
 
-                if($result == "not full"){
+                    $is_player_in_the_game = JoinPlan_model::check_player_in_game($plan_id);
 
-                    $bolean = JoinPlan_model::check_player_in_game($plan_id);
-
-                    if(  $bolean  == true ){
+                    if(  $is_player_in_the_game  == false ){
 
                         $html = " "; 
-
                         $html .= " <form action='' method='POST'> ";
                         $html .= " <input  onclick='myFunction()' type='submit' value='Add yourself' name='add_player' > ";
                         $html .= " </form> ";
 
                         return  $html ;
+
                     }else{
+
                         return "You are Already in";
+
                     }
 
                 }else{
                     return " its full";
                 }
+
             }
+
         }else{
+
             return "Something wrong";
+
         }
     }
+    
 
 
     public static function add_player($plan_id){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
-            if(isset($plan_id  )){ 
+            if(isset($plan_id)){ 
                 
-                $result = JoinPlan_model::joinPlayer($plan_id);
-                return $result;
+                $insert_the_player = JoinPlan_model::joinPlayer($plan_id);
+                return  $insert_the_player;
 
             }else{
-                return "Something wrong";
-            }
 
+                return "Something wrong";
+
+            }
         }
     }
 
@@ -78,25 +81,14 @@ class JoinPlan_control {
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+            if(isset($_POST['plan_id'])){
 
-            if(isset($_POST['plan_ID'])){
-
-
-                $plan_ID = $_POST['plan_ID'];
+                $plan_ID = $_POST['plan_id'];
                 return JoinPlan_model::quit_joined_games($plan_ID);
 
-
-            }
-
-          
+            }       
         }
-
-
     }
-
-
-
-
 }
 
  

@@ -1,5 +1,5 @@
 
- <?php
+<?php
 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\plans.control.php';
@@ -7,6 +7,7 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\plans.contr
 
 App::check_login();
 
+echo PlansControl::insert("reserve");
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +36,7 @@ App::check_login();
 
             
 
-            <select name="gameName" >
+            <select name="game_name" >
                 
                 <?php 
 
@@ -77,11 +78,10 @@ App::check_login();
         <?php 
         
          
-             
+
             echo PlansControl::reserveren();
           
-            echo PlansControl::insert("reserve");
-
+                
           
             
         }else{

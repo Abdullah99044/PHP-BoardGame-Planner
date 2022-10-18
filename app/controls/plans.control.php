@@ -15,11 +15,7 @@ class PlansControl {
 
             if(isset($_SESSION["user_name"])){
 
-
                 return PlansModel::get_personal_plans();
-
-                
-                
                  
             }
 
@@ -30,29 +26,31 @@ class PlansControl {
         }
     }
 
+
  
     
 
-    public static function game_details($gameName , $type_display ,  $name_of_the_orgnaiser , $id , $start_time , $type_user ){
+    public static function game_details($game_name , $display_type ,  $name_of_the_orgnaiser , $plan_id , $start_time , $type_user ){
 
-        $image_time =  PlansModel::gameData( $gameName);
-        $name_of_the_game = $image_time['name'];
-        $image = $image_time['image'];
-        $play_time = $image_time['play_minutes'];
-        $explain = $image_time['explain_minutes'];
-        $maxPlayers =  $image_time['max_players'];
+
+        $game_details     =  PlansModel::gameData( $game_name );
+        $name_of_the_game =  $game_details['name'];
+        $image            =  $game_details['image'];
+        $play_time        =  $game_details['play_minutes'];
+        $explain          =  $game_details['explain_minutes'];
+        $max_players      =  $game_details['max_players'];
 
         
-        $full_or_not = JoinPlan_model::join_bolean($id , $maxPlayers);
+        $is_full = JoinPlan_model::join_bolean($plan_id , $max_players);
 
         $html_code = " ";
 
-        $html_code .= "<br> <h2> Start time : $start_time  ($full_or_not)  </h2> <br> ";
+        $html_code .= "<br> <h2> Start time : $start_time  ($is_full)  </h2> <br> ";
 
-        if($type_display == "read_plans"){
+        if($display_type == "read_plans"){
 
-            $html_code .= "<a href='/../../meesterproef/app/views/detailsPage.php?game=$name_of_the_game&id=$id'> <img  src='/../../meesterproef/afbeeldingen/$image'   alt='$name_of_the_game' width='200' >   </a>  ";
-            $html_code .= "<br>  <p> Game : <a href='/../../meesterproef/app/views/detailsPage.php?game=$name_of_the_game&id=$id'> $name_of_the_game  </a>  <br> ";  
+            $html_code .= "<a href='/../../meesterproef/app/views/detailsPage.php?game=$name_of_the_game&id=$plan_id'> <img  src='/../../meesterproef/afbeeldingen/$image'   alt='$name_of_the_game' width='200' >   </a>  ";
+            $html_code .= "<br>  <p> Game : <a href='/../../meesterproef/app/views/detailsPage.php?game=$name_of_the_game&id=$plan_id'> $name_of_the_game  </a>  <br> ";  
         }
 
         $html_code .= "<p> The orgnaiser :  $name_of_the_orgnaiser  <br> " ;
@@ -61,11 +59,11 @@ class PlansControl {
 
         if($type_user == "admin"){  
                 
-            if($full_or_not == "not full"){
-                $html_code .= " <br>   <a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$gameName&id=$id&type=add'>       add player  </a>  <br>";
+            if($is_full == "not full"){
+                $html_code .= " <br>   <a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$game_name&id=$plan_id&type=add'>       add player  </a>  <br>";
             }
 
-            $html_code .= self::update_delete_plan($id);
+            $html_code .= self::update_delete_plan($plan_id);
             
         }
 
@@ -77,47 +75,54 @@ class PlansControl {
 
     }
 
-    public static function show_plans($results , $type_user , $type_display , $join_player  ){
 
-        if($results){
 
-            $game =   $results;
+
+
+
+    public static function show_plans($plan_details_query , $user_type , $type_display ){
+
+
+
+        if($plan_details_query){
+
+            $plan_details =   $plan_details_query;
             
-            $gameName = $game['name'];
-            $start_time = $game['startTime'];
-            $name_of_the_orgnaiser = $game['makerName'];
+            $game_name              =  $plan_details['name'];
+            $start_time             =  $plan_details['startTime'];
+            $name_of_the_orgnaiser  =  $plan_details['makerName'];
 
-            $id =  $game['id'];
+            $plan_id                =  $plan_details['id'];
 
             $html_code = "";
 
-            $html_code .= self:: game_details($gameName , $type_display ,  $name_of_the_orgnaiser , $id , $start_time , $type_user  );
+            $html_code .= self:: game_details($game_name  , $type_display ,  $name_of_the_orgnaiser , $plan_id   , $start_time , $user_type  );
             
             
             
-            if(App::read_how_many_players_in_plan($id) != 0){
+            if(App::read_how_many_players_in_plan($plan_id) != 0){
 
-                $players_list = PlansModel::players($id);
+                $players_list = PlansModel::players($plan_id);
 
                 foreach($players_list as $value){
 
-                    $row = PlansModel::read_player_data($value);
+                    $player_details =   PlansModel::read_player_data($value);
 
-                    $name =  $row['name'];
-                    $player_id =  $row['id'];
-                    $html_code .= " <br>  $name ";
+                    $player_name    =   $player_details['name'];
+                    $player_id      =   $player_details['id'];
+                    $html_code     .=   " <br>  $player_name ";
 
-                    if($type_user == "admin"){  
+                    if($user_type == "admin"){  
 
-                        $html_code .= "  <a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$name&id=$id&type=update'>  Update </a> ";
+                        $html_code .= "  <a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$player_name&id=$plan_id&type=update'>  Update </a> ";
 
                         
 
                         $html_code .= "<form action='' method='POST'> ";  
-                        $html_code .= "<input type='hidden' name='id' value='$id'> ";  
-                        $html_code .= "<input type='hidden' name='name' value='$name'> ";  
-                        $html_code .= "<input type='hidden' name='player_id' value='$player_id'> ";  
-                        $html_code .= "<input type='hidden' name='type' value='player'> ";  
+                        $html_code .= "<input type='hidden' name='plan_id'     value='$plan_id'> ";  
+                        $html_code .= "<input type='hidden' name='player_name' value='$player_name'> ";  
+                        $html_code .= "<input type='hidden' name='player_id'   value='$player_id'> ";  
+                        $html_code .= "<input type='hidden' name='delete_type' value='player'> ";  
                         $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
                         $html_code .= "</form>  ";
 
@@ -134,10 +139,10 @@ class PlansControl {
             $html_code .= "</p>  ";
             
 
-            if($type_user == "joinedGames"){
+            if($user_type == "joinedGames"){
 
                 $html_code .= "<form action='' method='POST'> ";  
-                $html_code .= "<input type='hidden' name='plan_ID' value='$id'> ";    
+                $html_code .= "<input type='hidden' name='plan_id' value='$plan_id'> ";    
                 $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
                 $html_code .= "</form>  ";
 
@@ -157,83 +162,74 @@ class PlansControl {
     }
 
 
+
+
+
     #Deze functies gaan data van de gebruiker halen en tovoegt dit data aan de deatabase
 
     public  function select_game()
     {   
-
   
-        $games_list = [];
-         
-
-        
-       
+        $games_list = []; 
         $result = PlansModel::selectGame();
 
-        while($row =  mysqli_fetch_assoc($result )){
+        while($game_details =  mysqli_fetch_assoc($result )){
 
             
-            $name = $row['name'];
-            $id = $row['id'];
-            $time = $row['play_minutes'];
-            $max_players = $row['max_players'];
-
-             
-
+            $game_name    = $game_details['name'];
+            $game_id      = $game_details['id'];
+            $play_time    = $game_details['play_minutes'];
+            $max_players  = $game_details['max_players'];
     
 
-            $value = "<option value='$id'> Name : $name | Time : $time | Max players : $max_players  </option>" ;
+            $value = "<option value='$game_id'> Name : $game_name | Time : $play_time | Max players : $max_players  </option>" ;
 
             array_push( $games_list ,  $value );
-
-            
 
         }
 
         return $games_list;
- 
-
-        
+       
     } 
 
-    public static function show_insert_boxes($select , $id , $userName , $type , $game_update ){
+
+
+
+
+    public static function show_insert_boxes($selected_game , $plan_id , $user_name , $opretaion_type , $update_plan ){
 
         $maker = $time =  '';
-        $game_players = ['' , '' , ' ' , '' , '' , '' , ' ' , '' , '' , '' , ' ' , ''];
      
         $html_code = " ";
 
-        if(isset($select , $id , $userName , $type , $game_update )){
+        if(isset($selected_game , $plan_id , $user_name , $opretaion_type , $update_plan )){
             
-            if($type == "update"){
+            if($opretaion_type == "update"){
 
-                $game_id = $id;
-                $_SESSION["game_id"] =  $game_id;
+                $user_name             =    $user_name;
+                $plan_details          =    $update_plan;
 
-                $username = $userName;
-                
-                $game = $game_update;
-
-                $num_players_in_plan = App::read_how_many_players_in_plan($game_id);
-
-                $maker = $game['makerName'];
-                $time = $game['startTime'];
+                $plan_id               =    $plan_details['id'];
+                $maker                 =    $plan_details['makerName'];
+                $time                  =    $plan_details['startTime'];
                 
 
-                $_SESSION["game"] =  $select;
+                $_SESSION["game"]      =    $selected_game;
 
-
-                $html_code .= "<input type='hidden' name='id'  value='$game_id'  > ";
+                $html_code .= "<input type='hidden' name='plan_id'  value='$plan_id'  > ";
             
             }
 
-            $row = PlansModel::show_insert_boxes($select , "not details");
+            $game_details = PlansModel::show_insert_boxes($selected_game , "not details");
 
-            echo App::gameDetails($row);
+            echo App::gameDetails($game_details);
             
-            $maxPlayers = $row['max_players'];
-            $playTime = $row['play_minutes'];
-            $game_name = $row['name'];
+            $max_players =    $game_details['max_players'];
+            $play_time   =    $game_details['play_minutes'];
+            $game_name  =    $game_details['name'];
+            
+
+
             
             $html_code .= "<h1> Make a plan </h1> <br> "  ;
 
@@ -243,9 +239,9 @@ class PlansControl {
 
             $html_code .= "<input type='hidden' name='game_name' value='$game_name' >  ";
 
-            $html_code .= "<input type='hidden' name='play_time' value='$playTime' >  <br> ";
+            $html_code .= "<input type='hidden' name='play_time' value='$play_time' >  <br> ";
 
-            $html_code .= "<input type='hidden' name='game_id' value='$select' >  <br> ";
+            $html_code .= "<input type='hidden' name='game_id' value='$selected_game' >  <br> ";
             
             $html_code .= "<label>Start time : </label> "; 
             
@@ -253,15 +249,12 @@ class PlansControl {
 
 
 
-                
-             
-       
 
-            $_SESSION["numPlayers"] =  $maxPlayers;
-            
-             
-            
-            if($type == "update"){
+            $_SESSION["numPlayers"] =  $max_players;
+
+
+                     
+            if($opretaion_type == "update"){
 
                 $html_code .= "<input   onclick='myFunction()'  type='submit' name='submit' value='update'> ";
 
@@ -280,28 +273,36 @@ class PlansControl {
 
     }
 
+
+
+
+
+
     public static function reserveren()
     {
  
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            if(!empty($_POST["gameName"])){
-                
+            if(!empty($_POST["game_name"])){
 
-                $select = $_POST['gameName'];
+                $selected_game = $_POST['game_name'];
+                $selected_game = mysqli_real_escape_string(App::dataBase() ,  $selected_game);
                
-                return self::show_insert_boxes($select , "" , "" , "" , "" );
+                return self::show_insert_boxes($selected_game , "" , "" , "" , "" );
  
             }
         }
     }
 
-    public static function insert($type){
+
+
+
+
+    public static function insert($opreation_type){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
-            if(!empty($_POST["maker"]) && !empty($_POST["time"])){
+            if(!empty($_POST["maker"]) && !empty($_POST["play_time"])){
 
                
                 $user_id =  App::select_user_id();
@@ -311,68 +312,28 @@ class PlansControl {
                 $person_who_explains_game = $_POST["maker"];
                 $person_who_explains_game = App::mysql_escape($person_who_explains_game);
 
-                #De start tijd van het spell
-
-                $time = $_POST["time"];  
+ 
+                $game_time  =  $_POST["time"];  
                 
-                $startTime = (string) $time;
+                $start_time =  (string) $game_time;
 
-                $startTime =  App::mysql_escape($startTime);
+                $start_time =  App::mysql_escape($start_time);
 
-                $play_time = $_POST['play_time'];
+                $play_time  =  $_POST['play_time'];
                 
-                #Deze 'session' is gemaakt om ons te vertellen over het aantal spelers
-
-                 
-
-                $players = []; #in dit array bewaren we de namen van de spelers
-
-                $number_of_players = $_SESSION["numPlayers"] ; #Deze variable bewaart de aantal van de spelers van class inputData
-                $number_of_players = (int)  $number_of_players; 
-
-                $game_Name = $_POST['game_name'];
-                $game_Name = App::mysql_escape($game_Name);
-
-                $game_id = $_POST['game_id'];
-                $game_id = App::mysql_escape($game_id);
-
-               
-
-
-                #Player + number ( zoals 'player1' of 'player2') zijn de namen van de input forms in reservePage.php
-
-                #We gaan zorgen om deze nammen in een autmatch maneer te maken door een nummer tevogen aan 'player'
-
-                #Daarna we gaan dit nammen elke keer in $players array toevogen zodat kunnen we alle players een keer toevogen in de database
-
-
-                $num = 1; 
-
-                for($i = 0 ; $i != $number_of_players ; $i++){
-
-                    $numString = (string) $num; 
-
-                    $playerName = 'player' . $numString; 
-
-                    if(!empty($_POST[$playerName])){
-
-                        $player = $_POST[$playerName];   #Hier verzamel we de naam van elke player die in de input forms heeft geschreven
-                        $player = App::mysql_escape($player);
-
-                        array_push($players , $player);
-                    } 
-                        
-
-                    $num++;
-
-
-                }
   
 
-                $id = $_POST["id"];
-                $player = App::mysql_escape($id);
+                $game_Name  =  $_POST['game_name'];
+                $game_Name  =  App::mysql_escape($game_Name);
 
-                return PlansModel::insert($type , $id , $game_Name , $person_who_explains_game ,  $startTime , $play_time , $user_id , $game_id , $players);
+                $game_id    =  $_POST['game_id'];
+                $game_id    =  App::mysql_escape($game_id);
+
+      
+
+                $plan_id = $_POST["plan_id"];
+ 
+                return PlansModel::insert($opreation_type , $plan_id , $game_Name , $person_who_explains_game , $start_time , $play_time , $user_id , $game_id );
                  
             }
         }
@@ -386,8 +347,8 @@ class PlansControl {
         
         $html_code .= "<a href='/../../meesterproef/app/views/update_plans.php?id=$id&type=update'> Update </a> "; 
         $html_code .= "<form action='' method='POST'> ";  
-        $html_code .= "<input type='hidden' name='id' value='$id'> ";  
-        $html_code .= "<input type='hidden' name='type' value='plan'> ";
+        $html_code .= "<input type='hidden' name='plan_id' value='$id'> ";  
+        $html_code .= "<input type='hidden' name='delete_type' value='plan'> ";
         $html_code .= "<input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
         $html_code .= "</form>  ";
 

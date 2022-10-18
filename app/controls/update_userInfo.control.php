@@ -15,16 +15,16 @@ class UpdateInfo {
             }else{
  
                  
-                $username = $_SESSION["user_name"];
-                $password = $_POST["password"];
-                $newPassword = $_POST["newPassword"];
+                $username     =   $_SESSION["user_name"];
+                $password     =   $_POST["password"];
+                $new_password =   $_POST["newPassword"];
 
-                $username = App::mysql_escape($username);
-                $password = App::mysql_escape($password);
-                $newPassword = App::mysql_escape($newPassword);
+                $username     =   App::mysql_escape($username);
+                $password     =   App::mysql_escape($password);
+                $new_password =   App::mysql_escape($new_password);
 
 
-                return UpdateInfo_MO::passwordUpdate($username , $password , $newPassword);
+                return UpdateInfo_MO::passwordUpdate($username , $password , $new_password);
 
             }
         } 
@@ -41,14 +41,14 @@ class UpdateInfo {
 
             }else{
 
-                $username = $_SESSION["user_name"];
-                $email = $_POST["email"];
-                $newEmail = $_POST["newEmail"];
+                $username   = $_SESSION["user_name"];
+                $email      = $_POST["email"];
+                $new_email  = $_POST["newEmail"];
 
-                $email = App::mysql_escape($email);
-                $newEmail = App::mysql_escape($newEmail);
+                $email      = App::mysql_escape($email);
+                $new_email  = App::mysql_escape($new_email);
                 
-                return UpdateInfo_MO::emailUpdate($username , $email , $newEmail);
+                return UpdateInfo_MO::emailUpdate($username , $email , $new_email);
                 
             }
         }

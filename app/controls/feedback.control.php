@@ -6,11 +6,11 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\feedback.mode
 
 class Feedback{
 
-    private static $type;
+    private static $feedback_type;
 
-    public function __construct($type)
+    public function __construct($feedback_type)
     {
-        return self::$type = $type;
+        return self::$feedback_type = $feedback_type;
     }
 
     public static function feedback(){
@@ -19,15 +19,15 @@ class Feedback{
 
             if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-                $id = App::select_user_id();
+                $user_id = App::select_user_id();
                 
-                $type = self::$type ;
+                $feedback_type  = self::$feedback_type ;
     
                 $feedBack = $_POST['feedback'];
     
                 $feedBack = App::mysql_escape($feedBack);
 
-                return Feedback_model::feeddback($id ,   $feedBack , $type );
+                return Feedback_model::feeddback($user_id ,   $feedBack , $feedback_type );
     
             }
 

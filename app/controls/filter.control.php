@@ -8,26 +8,36 @@ class FilterControl {
 
     public static function select_filter(){
 
-        $game_types= ["40 minuten spelletjes "  , "45 minuten spelletjes "   ,  "50 minuten spelletjes " ,  "60 minuten spelletjes "   , "minder dan 40 minuten spelletjes " , "meer dan 60 minuten spelletjes " ];
-        $game_time = [40 , 45 , 50 ,60 , 30 , 65];
+        
+
+        $game_types= [  "40 minuten spelletjes " =>  40 , 
+
+                        "45 minuten spelletjes " =>  45 , 
+                        
+                        "50 minuten spelletjes " =>  50 ,  
+                        
+                        "60 minuten spelletjes " =>  60  , 
+                        
+                        "minder dan 40 minuten spelletjes " => 30 , 
+                        
+                        "meer dan 60 minuten spelletjes "   => 65
+                
+                     ];
+
         
         $htm_code = " ";
 
         $htm_code .= "<form  method='POST' action='' > ";
 
         $htm_code .=  "<select name='games_type' > ";
-
-        $num1 = 0;
-        $num2 = 0;
-
-        foreach($game_types as  $value){
+      
+        foreach($game_types as  $key => $value){
 
 
-            $htm_code .= "<option value='$game_time[$num2]'>$game_types[$num1] </option> "; 
+            $htm_code .= "<option value='$value '> $key  </option> "; 
 
-            $num1++;
-            $num2++;
-            
+           
+ 
         }
         
         $htm_code .=  "</select> ";
@@ -48,11 +58,12 @@ class FilterControl {
 
     }
 
+
     public static function filter(){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            $type_of_game = $filter_off = $filter_onn = " ";
+            $game_type  = $filter_off =  " ";
 
             if(isset($_POST['filter_off'])){
                 
@@ -62,14 +73,12 @@ class FilterControl {
                 
             }else{ 
 
-                $type_of_game = $_POST['games_type']  ;
+                $game_type = $_POST['games_type']  ;
 
-                $type = $type_of_game;
+                $game_type = mysqli_real_escape_string( App::dataBase() , $game_type) ;
 
-                
-                return   FilterModel::filter($type);
-                
-               
+                return   FilterModel::filter($game_type);
+                   
             }
 
              
@@ -82,9 +91,9 @@ class FilterControl {
     public static function show_joined_games(){
         
 
-        $list = FilterModel::show_joined_games();
+        $filterd_games = FilterModel::show_joined_games();
         
-        return $list;
+        return $filterd_games;
     }
 
 }

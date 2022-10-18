@@ -87,12 +87,14 @@ class Update_Delete_Model {
     
 
 
-    public static function delete($id , $user_id , $type , $player_id){
+    public static function delete($plan_id , $user_id ,  $delete_type , $player_id){
+
+
         $mysql = App::dataBase();
-        $type = $type;
+        $delete_type = $delete_type;
 
 
-        if($type == "player"){
+        if($delete_type == "player"){
 
             $query = $mysql->prepare("DELETE FROM players WHERE  id= ?  ");
 
@@ -107,7 +109,7 @@ class Update_Delete_Model {
 
             $query = $mysql->prepare("DELETE FROM planning WHERE  id=? AND userID=? ");
 
-            App::prepare_method(2 , $query , "ii" , $id , $user_id , "");
+            App::prepare_method(2 , $query , "ii" , $plan_id  , $user_id , "");
     
              
             $query->close();

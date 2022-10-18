@@ -1,4 +1,4 @@
-<?
+<?php
 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\app.model.php';
@@ -232,43 +232,44 @@ class PlansModel {
 
  
 
-    public static function  insert($type , $id , $game_Name , $person_who_explains_game ,  $startTime , $play_time , $user_id , $game_id , $players ){
+    public static function  insert($type , $id , $game_Name , $person_who_explains_game ,  $startTime , $play_time , $user_id , $game_id  ){
 
         if($type == "update"){
-            $id = $id;
-            
+            $id = $id;                
+ 
+            $mysqli = App::dataBase();
+            $query = $mysqli->prepare("UPDATE planning SET  makerName = ?  WHERE id= ? ");
+            $query->bind_param( "si"   , $person_who_explains_game   , $id );
+            $query->execute();
 
-            $data = [ $game_Name , $person_who_explains_game , $startTime , $play_time , $user_id ];
-            $coloumn = [ 'name' , 'makerName' , 'startTime' , 'play_time', 'userID' ];
-            $type = ["s" , "s" , "s" , "s" ,  "i"];
+            if($query){
 
-            $num = 0;    
+                $query->close();
 
-            foreach($data as $value){
-
-                $nas =  $coloumn[$num];
-                $nak =  $type[$num];
-
-                $mysqli = App::dataBase();
-                $query = $mysqli->prepare("UPDATE planning SET  $nas= ? WHERE id= ? ");
-                App::prepare_method(2 , $query , $nak , $value , $id , "" ,   );
-
+                $query = $mysqli->prepare("UPDATE planning SET  startTime = ?  WHERE id= ? ");
+                $query->bind_param( "si"   , $startTime  , $id );
+                $query->execute();
                 
+                if($query){
 
-               
-                $num++;
-            } 
+                    $query->close();
+                    $mysqli->close();
+        
+                
+                    return header('Location: /../../meesterproef/app/views/feedback_page.php?type=update');
+                    
+                }else{
 
+                    return die("Query failed! update plan $id" . mysqli_error(App::dataBase()));
 
-            $query->close();
-            $mysqli->close();
+                }
 
+            }else{
+
+                return die("Query failed! update plan $id" . mysqli_error(App::dataBase()));
+
+            }
            
-            
-                
-            return header('Location: /../../meesterproef/app/views/feedback_page.php?type=update');
-
-            
                 
         }else{
 
@@ -276,33 +277,25 @@ class PlansModel {
             $query = $mysqli->prepare("INSERT INTO planning(name , makerName , startTime , play_time , userID , Game_ID ) VALUES( ? ,  ? , ?  , ? , ? , ? )");
             $query->bind_param("ssssii" , $game_Name , $person_who_explains_game , $startTime , $play_time , $user_id , $game_id );
             $query->execute();
-            
-            $query->close();
-            $mysqli->close();
               
-            
+            if($query){
 
-            return header('Location: /../../meesterproef/app/views/feedback_page.php?type=reserveren');
-                
-            
+                $query->close();
+                $mysqli->close();
 
+
+                return header('Location: /../../meesterproef/app/views/feedback_page.php?type=reserveren');
+
+            }else{
+
+                return die("Query failed! update plan insert plan" . mysqli_error(App::dataBase()));
+
+            }
             
         }
     }
-
     
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>

@@ -8,10 +8,10 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\update_delete
 
 class UpdateDelete {
 
-
+ 
 
     public static function update($id){
-
+ 
             $username = $_SESSION["user_name"];
             
             $user_id = App::select_user_id();
@@ -33,6 +33,9 @@ class UpdateDelete {
 
     }
 
+
+
+    
     public static function add_update_Player($type){
 
         if($_SERVER["REQUEST_METHOD"] == "POST" ){
@@ -60,25 +63,29 @@ class UpdateDelete {
             
     }
  
+
+
+
+
     public static function delete(){
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            if(isset( $_POST['type']  , $_POST['id']  )){
+            if(isset( $_POST['delete_type']  , $_POST['plan_id']  )){
 
-                $id =  $_POST['id'];
-                $type = $_POST['type'];
-                $player_id = $_POST['player_id']; 
+                $plan_id     =    $_POST['plan_id'];
+                $delete_type =    $_POST['delete_type'];
+                $player_id   =    $_POST['player_id']; 
 
-                $id = App::mysql_escape($id);
-                $type = App::mysql_escape($type);
-                $player_id = App::mysql_escape($player_id);
+                $plan_id     =    App::mysql_escape($plan_id);
+                $delete_type =    App::mysql_escape($delete_type);
+                $player_id   =    App::mysql_escape($player_id);
 
 
-                $user_id = App::select_user_id();
+                $user_id     = App::select_user_id();
                  
 
-                return Update_Delete_Model::delete($id , $user_id ,  $type , $player_id);
+                return Update_Delete_Model::delete($plan_id , $user_id ,  $delete_type , $player_id);
 
  
             
