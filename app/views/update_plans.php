@@ -1,13 +1,18 @@
 
  <?php
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_delete_plans.control.php';
 
-$update_delete = new Update_delelte();
-$plans_insert = new PlansInsert();
 
+App::check_login();
+ 
 $id = $_GET['id'];
-$plans_insert->insert("update");
+
+$id = App::mysql_escape($id);
+
+
+PlansControl::insert("update");
+
 
 ?>
 
@@ -15,15 +20,7 @@ $plans_insert->insert("update");
 <html lang="en">
 <head>
 
-<script>
-    function myFunction() {
-      let result = confirm("Bennt U zeker?");
 
-        if (result == false) {
-            event.preventDefault();
-        }
-    }
-</script>
 
      
 </head>
@@ -48,7 +45,7 @@ $plans_insert->insert("update");
         
 
              
-            echo $update_delete->update($id);
+            echo UpdateDelete::update($id);
 
                 
                 
@@ -63,7 +60,7 @@ $plans_insert->insert("update");
             
             ?>
                 
-                <input   onclick="myFunction()"  type='submit' name='submit' value='update'> 
+              
 
             </form>
         

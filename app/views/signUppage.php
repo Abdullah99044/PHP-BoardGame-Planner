@@ -1,11 +1,11 @@
 <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\signUp.control.php';
 
-$signUp= new App();
+  
 
-echo $signUp->signUp();
+echo SignUp_control::signUp();
 
  
 ?>

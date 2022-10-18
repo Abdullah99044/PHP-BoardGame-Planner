@@ -4,15 +4,13 @@
  <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\filter.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.control.php';
 
-$app = new App();
 
-$plans_view = new PlansView();
+ 
 
-$plans_cintrol = new PlansControl();
-
-$filter = new Filter();
+ 
+ 
 
 ?>
 
@@ -31,7 +29,7 @@ $filter = new Filter();
 
     <header class="header">
 
-        <?php include 'pages/pageParts/header.php'; ?>
+        <?php include 'app/views/pageParts/header.php'; ?>
 
     </header>
 
@@ -41,13 +39,13 @@ $filter = new Filter();
         
         <div>
             
-        <form action='pages/loginPage.php' method='POST'> 
+        <form action='app/views/loginPage.php' method='POST'> 
 
                 
             <input   type='submit' value='login'>
         </form> 
 
-        <form action='pages/signUppage.php' method='POST'>;
+        <form action='/../../meesterproef/app/views/signUppage.php' method='POST'>;
 
             <input   type='submit' value='signUp'> 
     
@@ -60,16 +58,16 @@ $filter = new Filter();
 
         ####################################### filter ########################################
 
-        echo $filter->select_type_of_games(); # Kies een welke  spelen tijd wil je.
+        echo FilterControl::select_filter(); # Kies een welke  spelen tijd wil je.
 
-        $list_filter = $filter->filter_control() ; # Functie filter_control heeft twee uitkomst "false" of een lijst
+        $list_filter = FilterControl::filter(); # Functie filter_control heeft twee uitkomst "false" of een lijst
 
         #######################################################################################
 
 
-        $list = $plans_view->readplans("everyone" , "public");
-
-        if($filter->filter_control() == false){
+        $list = PlansControl::readplans("everyone" , "public");
+ 
+        if(FilterControl::filter() == false){
 
             foreach( $list as $value){
 
@@ -79,13 +77,24 @@ $filter = new Filter();
 
         }else{
 
-            foreach( $list_filter as $value){
+            
+           if($list_filter  == "No plans"){
 
-                echo $value;
+            echo "No plans";
+             
+            }else{
+
+                foreach(  $list_filter as $value){
+
+                    echo  $value;
+
+                }
 
             }
-        
 
+            
+
+              
         }
 
       
@@ -98,7 +107,7 @@ $filter = new Filter();
 
    
     <footer>
-        <?php include 'pages/pageParts/footer.php'; ?>
+        <?php include 'app/views/pageParts/footer.php'; ?>
     </footer>
     
 </body>

@@ -1,13 +1,15 @@
 <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\feedback.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\feedback.control.php';
 
-$feedBack = new Feedback();
+App::check_login();
 
 $type_of_feedback = $_GET['type'];
- 
-$feedBack->feedback_insert($type_of_feedback);
+$type_of_feedback = App::mysql_escape($type_of_feedback);
+
+$feedback = new Feedback($type_of_feedback);
+echo Feedback::feedback();
 
 ?>
 
@@ -27,8 +29,7 @@ $feedBack->feedback_insert($type_of_feedback);
     <article>
         <div>
 
-        <?php print_r($feedBack->select_user_id()); ?>
-         
+          
          <form  method="POST" action="" >
     
             <textarea  name="feedback" rows="10" cols="50" required>

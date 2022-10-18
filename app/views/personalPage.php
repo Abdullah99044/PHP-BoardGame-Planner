@@ -1,11 +1,15 @@
 <?php 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_delete_plans.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_delete_plans.control.php';
 
  
-$app = new App();  
-$plans_view = new PlansView();
-$delete = new Update_delelte();
+  
+
+App::check_login(); 
+
+
+
+UpdateDelete::delete( );
 
 
 $name =    $_SESSION["user_name"];
@@ -17,15 +21,7 @@ $name =    $_SESSION["user_name"];
 <html lang="en">
 <head>
 
-<script>
-    function myFunction() {
-      let result = confirm("Bennt U zeker?");
-
-        if (result == false) {
-            event.preventDefault();
-        }
-    }
-</script>
+ 
      
 </head>
 <body>
@@ -38,12 +34,7 @@ $name =    $_SESSION["user_name"];
 
     <article>
         
-    <?php  
-
-
-    if(isset( $_SESSION["user_name"])){
-
-        ?>
+     
         <div>
 
 
@@ -60,7 +51,7 @@ $name =    $_SESSION["user_name"];
 
         <div>
 
-            <form action="update_user_info_page.php" method="POST">
+            <form action="updatePassword.php" method="POST">
 
                 <input type="submit" name="submit" value="Updat your password">
                 <input type='hidden' name='Type' value='password'>
@@ -74,7 +65,7 @@ $name =    $_SESSION["user_name"];
 
             </form>
 
-            <form action="/../../meesterproef/pages/reservePage.php" method="POST">
+            <form action="/../../meesterproef/app/views/reservePage.php" method="POST">
 
                 <input type='hidden' name='type' value='reserve'>
                 
@@ -91,52 +82,52 @@ $name =    $_SESSION["user_name"];
 
             </form>
 
+            <form action="/../../meesterproef/app/views/joinedGames.php" method="POST">
+
+                
+
+                <input type="submit" name="submit" value="The games I joined">
+
+            </form>
+
             <?php  
 
-            if(isset( $_POST['id'])){
-
-                $id =  $_POST['id'];
-                $delete->delete($id);
-            
-            }else{
-            
-                $id  = " ";
-            
-            }
+             
+ 
 
 
             if(isset( $_POST['logout'])){
 
                 $logout =  $_POST['logout'];
-                $app->logout($logout);
+                App::logout($logout);
             
             }else{
             
                 $logout  = " ";
             
             }
-
-
             
+            $list = PlansControl::readplans("personal" , "admin");
 
-            $list = $plans_view->readplans("personal" , "admin");
+                if($list != "No plans yet" ){
 
-            foreach($list as $value){
+                    foreach($list as $value){
 
-                echo $value;
-            }
-            
+                        echo $value;
+                    }
+
+                }else{
+
+                    echo $list;
+                }
             
             ?>
 
         </div>
 
-        <?php }else{
+        
 
-            echo '<h1> login pls!  </h1>';
-        }
-
-        ?>
+       
         
     </article>
 

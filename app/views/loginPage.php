@@ -2,13 +2,10 @@
  <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\app.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\login.control.php';
 
-$app = new App();
+echo Login_control::login();
 
-echo $app->login(); 
-
- 
 ?>
 
 <!DOCTYPE html>

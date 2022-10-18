@@ -9,6 +9,15 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/../../meesterproef/style.css">
+    <script>
+    function myFunction() {
+        let result = confirm("Bennt U zeker?");
+
+            if (result == false) {
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -24,7 +33,7 @@
 
     ?>
 
-   <a class='navButtons' href='/../../meesterproef/index/'>index </a> 
+   <a  href='/../../meesterproef/index.php'>index </a> 
 
    
     

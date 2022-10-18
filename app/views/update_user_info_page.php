@@ -1,14 +1,13 @@
 <?php 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\update_user_info.class.php';
- 
-
-$updatePassword = new updateData();
-$updatePassword->passwordUpdate();
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_userInfo.control.php';
 
 
-$updateEmail = new updateData();
-$updateEmail->emailUpdate();
+App::check_login();
+
+echo UpdateInfo::passwordUpdate();
+
+echo UpdateInfo::emailUpdate();
 
 ?>
 

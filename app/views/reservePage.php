@@ -2,11 +2,10 @@
  <?php
 
 
-require 'C:\Program Files\ammps2\Ampps\www\meesterproef\classes\plansControl.class.php';
+require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\plans.control.php';
 
-$plans_insert = new PlansInsert();
-$plans_control = new PlansControl();
 
+App::check_login();
 
 ?>
 
@@ -14,15 +13,7 @@ $plans_control = new PlansControl();
 <html lang="en">
 <head>
 
-<script>
-    function myFunction() {
-      let result = confirm("Bennt U zeker?");
-
-        if (result == false) {
-            event.preventDefault();
-        }
-    }
-</script>
+ 
 
      
 </head>
@@ -50,17 +41,22 @@ $plans_control = new PlansControl();
 
   
 
-                   $row = $plans_control->select_game();
+                   
+                    $select = new PlansControl();
 
-                   foreach(   $row as $value){
+                    $list = $select->select_game();
+                     
+                    foreach ( $list as $value){
                         echo $value;
-
+                         
                     }
+
+                    
                 
                
                 
                 
-                # للتذكير استخدم forLoop لتكرير كودات html
+              
                 
                 ?>
 
@@ -82,9 +78,9 @@ $plans_control = new PlansControl();
         
          
              
-            echo $plans_control->reserveren();
-            
-            echo $plans_insert->insert("reserve");
+            echo PlansControl::reserveren();
+          
+            echo PlansControl::insert("reserve");
 
           
             
@@ -98,7 +94,6 @@ $plans_control = new PlansControl();
         ?>
 
        
-            <input  onclick="myFunction()"  type='submit' name='submit' value='reserve'> 
 
         </form>
         
