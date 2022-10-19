@@ -27,7 +27,7 @@ echo PlansControl::insert("reserve");
 
 
 
-    <article>
+    <article class="article">
 
     <?php if(isset( $_SESSION["user_name"])){ ?>
 

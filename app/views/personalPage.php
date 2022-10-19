@@ -22,7 +22,7 @@ $name =    $_SESSION["user_name"];
 <body>
 
 
-    <header class="header">
+    <header   class="header">
 
     <?php require 'pageParts/header.php'; ?>
 
@@ -71,9 +71,8 @@ $name =    $_SESSION["user_name"];
             </form>
 
             
-            <form action="" method="POST">
+            <form action="/../../meesterproef/app/views/logoutPage.php" method="POST">
 
-                <input type='hidden' name='logout' value='true'>
                 <input onclick="myFunction()" type="submit" name="submit" value="Log out">
 
             </form>

@@ -96,6 +96,8 @@ class PlansControl {
 
             $html_code = "";
 
+            $html_code = "<div> ";
+
             $html_code .= self:: game_details($game_name  , $type_display ,  $name_of_the_orgnaiser , $plan_id   , $start_time , $user_type  );
             
             

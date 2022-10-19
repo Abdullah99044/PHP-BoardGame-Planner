@@ -35,30 +35,18 @@ class App {
 
 
      
-
-    public function personal_nav(){
-        $html_code = " ";
  
-        if(isset($_SESSION['user_name'])){
-            $html_code .= "<h2><a href='/../../meesterproef/app/views/personalPage.php'>Personal page</a></h2";
-        }
-
-        return $html_code;
-    }
-
 
 
     
 
-    public static function logout($logout){
+    public static function logout(){
 
-        if($logout == "true"){
+        unset($_SESSION['user_name'] , $_SESSION["isLogged"]);
+        session_destroy();
 
-            unset($_SESSION['user_name'] , $_SESSION["isLogged"]);
-            session_destroy();
-
-            return header('Location: /../../meesterproef/index.php');
-        }
+        return header('Location: /../../meesterproef/index.php');
+    
     }
 
 
