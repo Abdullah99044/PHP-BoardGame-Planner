@@ -11,13 +11,13 @@ class Login_Model {
         if(App::check_connection()){
             
             
-            $mysql = App::dataBase();
-            $query = $mysql->prepare("SELECT COUNT(*) FROM user where username= ? AND password= ? ") ;
+            $mysql    =   App::dataBase();
+            $query    =   $mysql->prepare("SELECT COUNT(*) FROM user where username= ? AND password= ? ") ;
             App::prepare_method(2 , $query , "ss" , $username , $password , "");
-            $result =  $query->get_result();
+            $result   =   $query->get_result();
 
-            $row =  $result->fetch_assoc();
-            $count = $row["COUNT(*)"];
+            $row      =   $result->fetch_assoc();
+            $count    =   $row["COUNT(*)"];
             
 
             if($result){
@@ -27,16 +27,15 @@ class Login_Model {
                 $mysql->close();
 
                 if($count == 1){
-
-                    
+ 
                     $_SESSION["user_name"] = $username;  
-                    $_SESSION["login"] = TRUE ;
+                    $_SESSION["isLogged"] = TRUE ;
                      
                     return header('Location: /../../meesterproef/app/views/personalPage.php');
 
                 }else{
 
-                    $_SESSION["login"] = FALSE ;
+                    $_SESSION["isLogged"] = FALSE ;
                     return  "<h1> Login failed  . Invalid username or password  .</h1>";  
 
                 }

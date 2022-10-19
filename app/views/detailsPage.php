@@ -1,5 +1,4 @@
-
- <?php
+<?php
 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\gameDetails.control.php';
@@ -19,7 +18,8 @@ echo JoinPlan_control::add_player($id);
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-     
+    <?php include 'pageParts/head.php'; ?>
+    <title>Details pagina| Meesterproef </title>
 </head>
 <body>
 
@@ -29,16 +29,24 @@ echo JoinPlan_control::add_player($id);
 
     </header>
 
+
+
     <article>
+
+
+
         <div>
          
         <?php   echo   GameDetails_Control::get_gamesDetails($game) ;  ?>
 
         </div>
 
+
+
         <div>
 
         <?php 
+
         
         if(!empty( $_SESSION["user_name"]) && $_SESSION["login"] != true){
 
@@ -46,11 +54,18 @@ echo JoinPlan_control::add_player($id);
 
             echo JoinPlan_control::joinPlan($id  , $game);
         }
+
+
         ?>
 
         
         </div>
+
+
+
     </article>
+
+
 
     <footer>
         <?php require 'pageParts/footer.php'; ?>

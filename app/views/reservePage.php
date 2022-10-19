@@ -1,4 +1,3 @@
-
 <?php
 
 
@@ -13,12 +12,11 @@ echo PlansControl::insert("reserve");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
- 
-
-     
+    <?php include 'pageParts/head.php'; ?>
+    <title>Reserveringspagina | Meesterproef</title>
 </head>
 <body>
+
 
     <header class="header">
 
@@ -26,23 +24,20 @@ echo PlansControl::insert("reserve");
 
     </header>
 
+
+
+
     <article>
 
-    <?php if(isset( $_SESSION["user_name"])){
+    <?php if(isset( $_SESSION["user_name"])){ ?>
 
 
-        ?>
         <form method="POST" action="reservePage.php">
-
-            
 
             <select name="game_name" >
                 
                 <?php 
 
-  
-
-                   
                     $select = new PlansControl();
 
                     $list = $select->select_game();
@@ -51,55 +46,37 @@ echo PlansControl::insert("reserve");
                         echo $value;
                          
                     }
-
-                    
-                
-               
-                
-                
-              
-                
+  
                 ?>
-
-
 
             </select>
 
-             
-            
-            
             <input type="submit" name="submit" value="submit">
+
         </form>
+
+
 
         <form method="POST" action="reservePage.php">
 
-        
-
         <?php 
         
-         
-
             echo PlansControl::reserveren();
-          
-                
-          
             
         }else{
             echo '<h1> login pls!  </h1>';
         }
-            
-       
-        
+
         
         ?>
 
-       
-
         </form>
         
-            
-       
+           
     </article>
+
+
+
 
     <footer>
         <?php include 'pageParts/footer.php'; ?>

@@ -13,25 +13,25 @@ class UpdateInfo_MO {
         if(App::check_connection()){
                   
             
-            $mysqli = App::dataBase();
+            $mysqli          =        App::dataBase();
 
-            $query  = $mysqli->prepare("SELECT *  FROM user where username= ? ") ;
-            $result = App::prepare_method(1 , $query , "s" , $username , "" , "" );
-            $data   = $query->get_result();
+            $query           =        $mysqli->prepare("SELECT *  FROM user where username= ? ") ;
+            $result          =        App::prepare_method(1 , $query , "s" , $username , "" , "" );
+            $user_data       =        $query->get_result();
 
-            $row  =           $data->fetch_assoc();
-            $user_Password =  $row["password"];
-            $id =             $row["id"];
+            $row             =        $user_data->fetch_assoc();
+            $user_Password   =        $row["password"];
+            $user_id         =        $row["id"];
              
             if($result ){
                 
                 if($password == $user_Password){
 
                     $query->close();
-                    $data->close();
+                    $user_data->close();
     
-                    $query = $mysqli->prepare("UPDATE user SET password= ? WHERE id= ? ");
-                    $result =  App::prepare_method(2 , $query , "si" , $newPassword , $id , "" );
+                    $query     =      $mysqli->prepare("UPDATE user SET password= ? WHERE id= ? ");
+                    $result    =      App::prepare_method(2 , $query , "si" , $newPassword , $user_id , "" );
 
                     if($result){
 
@@ -69,20 +69,26 @@ class UpdateInfo_MO {
 
 
 
+
+
+
+
+
+
     public static function emailUpdate($username , $email , $newEmail){
 
        
 
-        $mysqli =  App::dataBase();
+        $mysqli        =     App::dataBase();
 
-        $query = $mysqli->prepare("SELECT * FROM user where username= ? ") ;
-        $result =  App::prepare_method(1 , $query , "s" , $username , "" , "" );
+        $query         =     $mysqli->prepare("SELECT * FROM user where username= ? ") ;
+        $result        =     App::prepare_method(1 , $query , "s" , $username , "" , "" );
 
-        $data =  $query->get_result();
-        $row = $data->fetch_assoc();
+        $user_data     =     $query->get_result();
+        $row           =     $user_data->fetch_assoc();
 
-        $user_email = $row["email"];
-        $id =  $row["id"];
+        $user_email    =     $row["email"];
+        $user_id       =     $row["id"];
 
         if($result){
             
@@ -91,13 +97,13 @@ class UpdateInfo_MO {
                 
                 $query->close();
 
-                $query = $mysqli->prepare("UPDATE user SET email= ? WHERE id= ? ");
-                $result =  App::prepare_method(2 , $query , "si" , $newEmail , $id , "" );
+                $query      =       $mysqli->prepare("UPDATE user SET email= ? WHERE id= ? ");
+                $result     =       App::prepare_method(2 , $query , "si" , $newEmail , $user_id  , "" );
 
                 if($result){
 
                     $query->close();
-                    $data->close();
+                    $user_data->close();
                     $mysqli->close();
 
                     return header('Location: /../../meesterproef/app/views/personalPage.php');

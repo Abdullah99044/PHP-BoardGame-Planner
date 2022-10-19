@@ -1,13 +1,9 @@
-
- <?php
+<?php
 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_delete_plans.control.php';
  
 App::check_login();
-
-
-
  
 if(!isset($_GET['id'], $_GET['name'] , $_GET['type'])){
 
@@ -15,32 +11,29 @@ if(!isset($_GET['id'], $_GET['name'] , $_GET['type'])){
 
 }else{
     
-    $id = $_GET['id'];
+    $id   = $_GET['id'];
     $name = $_GET['name'];
     $type = $_GET['type'];
 
      
-    $id = App::mysql_escape($id);
+    $id   = App::mysql_escape($id);
     $name = App::mysql_escape($name);
-    $type  = App::mysql_escape($type );
+    $type = App::mysql_escape($type );
      
     
     echo UpdateDelete::add_update_Player($type);
 }
-
-
-
  
-
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
- 
-
-     
+<head>     
+    <?php include 'pageParts/head.php'; ?>
+    <title> Speler toevoegen of updaten | Meesterproef </title>
 </head>
 <body>
 
@@ -50,20 +43,18 @@ if(!isset($_GET['id'], $_GET['name'] , $_GET['type'])){
 
     </header>
 
+
+
+
     <article>
 
     
         <form method="POST" action=" ">
 
-          
             <input type="text" name="player" >
-            
             <input type="hidden" name="id" value="<?=$id?>">
             <input type="hidden" name="name" value="<?=$name?>">
         
-         
-
-       
             <input  onclick="myFunction()"  type='submit' name='submit'  > 
 
         </form>
@@ -71,6 +62,9 @@ if(!isset($_GET['id'], $_GET['name'] , $_GET['type'])){
             
        
     </article>
+
+
+    
 
     <footer>
         <?php include 'pageParts/footer.php'; ?>

@@ -12,43 +12,51 @@ class PlansModel {
 
     public static function gameData($gameName){
 
-        $mysqli = App::dataBase();
-        $query_image_time = $mysqli->prepare("SELECT *  FROM games WHERE name= ? ");
-        App::prepare_method(1 , $query_image_time , "s" ,$gameName , "" , "" );
-        $result_image_time = $query_image_time->get_result();
+        $mysqli       =    App::dataBase();
+        $query        =    $mysqli->prepare("SELECT *  FROM games WHERE name= ? ");
+        App::prepare_method(1 ,$query , "s" ,$gameName , "" , "" );
+        $result       =    $query->get_result();
 
-        $query_image_time->close();
+        $query->close();
         $mysqli->close();
 
-        return $result_image_time->fetch_assoc();;
+        return $result->fetch_assoc();;
 
     }
 
 
-    public static function players($planID){
 
-        $id = [];
 
-        $mysqli = App::dataBase();
+
+
+    public static function players($plan_id){
+
+        $players_id = [];
+
+        $mysqli          =   App::dataBase();
         
 
-        $query = $mysqli->prepare("SELECT  GROUP_CONCAT(id) FROM players WHERE plan_id= ? ");
-        App::prepare_method(1 , $query , "i" , $planID , "" , "");
-        $result =  $query->get_result();
+        $query           =   $mysqli->prepare("SELECT  GROUP_CONCAT(id) FROM players WHERE plan_id= ? ");
+        App::prepare_method(1 , $query , "i" , $plan_id , "" , "");
+        $result          =   $query->get_result();
 
-        $row_id  = $result->fetch_assoc();       
+        $row             =   $result->fetch_assoc();       
 
-        $row  =  $row_id['GROUP_CONCAT(id)'];
+        $players_data    =   $row['GROUP_CONCAT(id)'];
 
         $query->close();
          
 
-        $id = explode(",", $row ) ;
+        $players_id = explode(",", $players_data ) ;
 
-        return $id;
+        return $players_id;
 
 
     }
+
+
+
+
 
     public static function read_player_data($id){
 
@@ -64,61 +72,67 @@ class PlansModel {
 
     }
 
+
+
+
+
     public static function get_personal_plans(){
 
 
-        $id = [];
-        $plans = [];
+        $plans_id        =    [];
+        $user_plans      =    [];
+  
+        $mysqli          =    App::dataBase();
+        $userID          =    App::select_user_id();
 
-        $mysqli = App::dataBase();
-        $userID = App::select_user_id();
-
-        $query = $mysqli->prepare("SELECT  GROUP_CONCAT(id) FROM planning WHERE userID= ? ");
+        $query           =    $mysqli->prepare("SELECT  GROUP_CONCAT(id) FROM planning WHERE userID= ? ");
         App::prepare_method(1 , $query , "i" , $userID , "" , "");
-        $result =  $query->get_result();
+        $result          =    $query->get_result();
 
-        $rowTime = $result->fetch_assoc();       
+        $rowTime         =    $result->fetch_assoc();       
 
-        $row  = $rowTime['GROUP_CONCAT(id)'];
+        $row             =    $rowTime['GROUP_CONCAT(id)'];
 
         $query->close();
          
 
-        $id= explode(",",$row ) ;
+        $plans_id        =    explode(",",$row ) ;
 
         if($row != 0){
 
-            foreach($id as $value){
+            foreach($plans_id  as $value){
 
-                $query  = $mysqli->prepare("SELECT  * FROM planning WHERE id= ? ");
+                $query   =     $mysqli->prepare("SELECT  * FROM planning WHERE id= ? ");
                 App::prepare_method(1 , $query , "i" , $value , "" , "" );
-                $result_1 =  $query->get_result();
+                $result  =     $query->get_result();
 
-                array_push($plans , PlansControl::show_plans( $result_1->fetch_assoc() , "admin" , "read_plans" , false ));
+                array_push($user_plans , PlansControl::show_plans( $result->fetch_assoc() , "admin" , "read_plans" , false ));
 
             }
 
             $query->close();
             $mysqli->close();
 
-            return $plans;
+            return $user_plans;
 
         }else{
             return "No plans yet";
         }
 
-        
-        
-        
-
     }
+
+
+
+
+
+
 
     public static function get_all_plans(){
         
         $plans_list = [];
 
-        $mysqli = App::dataBase();
-        $query = $mysqli->prepare("SELECT id FROM planning");
+        $mysqli =  App::dataBase();
+        $query  =  $mysqli->prepare("SELECT id FROM planning");
         $query->execute();
         $result =  $query->get_result();
 
@@ -145,12 +159,17 @@ class PlansModel {
         
     }
 
+
+
+
+
+
     public static function get_all_planning($id){
 
-        $mysqli = App::dataBase();
-        $query = $mysqli->prepare("SELECT * FROM planning WHERE id= ? ");
+        $mysqli   =    App::dataBase();
+        $query    =    $mysqli->prepare("SELECT * FROM planning WHERE id= ? ");
         App::prepare_method(1 , $query , "i" , $id , "" , "");
-        $result = $query->get_result();
+        $result   =    $query->get_result();
 
         $query->close();
         $mysqli->close();
@@ -159,6 +178,11 @@ class PlansModel {
         return $result ;
 
     }
+
+
+
+
+
 
     public static function get_planning_userId($id , $user_id){
 
@@ -177,12 +201,17 @@ class PlansModel {
          
     }
 
+
+
+
+
+
     public static function selectGame(){
 
-        $mysqli = App::dataBase();
-        $query = $mysqli->prepare("SELECT * FROM games");
+        $mysqli    =     App::dataBase();
+        $query     =     $mysqli->prepare("SELECT * FROM games");
         $query->execute();
-        $result =  $query->get_result();
+        $result    =     $query->get_result();
 
 
         $query->close();
@@ -200,17 +229,22 @@ class PlansModel {
     }
 
 
+
+
+
+
+
     #public static function select_Game_data(){
 
 
 
-    public static function show_insert_boxes($select , $type){
+    public static function show_insert_boxes($selected_game_id , $type){
 
-        $mysqli = App::dataBase();
-        $query = $mysqli->prepare("SELECT * FROM games where id= ? ") ;    
-        App::prepare_method(1 , $query , "i" , $select ,"" , "");
+        $mysqli  =      App::dataBase();
+        $query   =      $mysqli->prepare("SELECT * FROM games where id= ? ") ;    
+        App::prepare_method(1 , $query , "i" , $selected_game_id ,"" , "");
 
-        $result = $query->get_result();
+        $result  =      $query->get_result();
  
         $query->close();
         $mysqli->close();
@@ -228,6 +262,12 @@ class PlansModel {
     }
 
 
+
+
+
+
+
+
     #Deze functies gaan Plan Data ann de dataBase toevoegen
 
  
@@ -237,8 +277,8 @@ class PlansModel {
         if($type == "update"){
             $id = $id;                
  
-            $mysqli = App::dataBase();
-            $query = $mysqli->prepare("UPDATE planning SET  makerName = ?  WHERE id= ? ");
+            $mysqli    =     App::dataBase();
+            $query     =     $mysqli->prepare("UPDATE planning SET  makerName = ?  WHERE id= ? ");
             $query->bind_param( "si"   , $person_who_explains_game   , $id );
             $query->execute();
 
@@ -246,7 +286,7 @@ class PlansModel {
 
                 $query->close();
 
-                $query = $mysqli->prepare("UPDATE planning SET  startTime = ?  WHERE id= ? ");
+                $query =     $mysqli->prepare("UPDATE planning SET  startTime = ?  WHERE id= ? ");
                 $query->bind_param( "si"   , $startTime  , $id );
                 $query->execute();
                 
@@ -261,7 +301,6 @@ class PlansModel {
                 }else{
 
                     return die("Query failed! update plan $id" . mysqli_error(App::dataBase()));
-
                 }
 
             }else{
@@ -291,10 +330,8 @@ class PlansModel {
                 return die("Query failed! update plan insert plan" . mysqli_error(App::dataBase()));
 
             }
-            
         }
-    }
-    
+    }   
 }
 
 

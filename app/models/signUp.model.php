@@ -10,15 +10,15 @@ class Signup_model {
         if(App::check_connection()){  
 
 
-            $mysqli = App::dataBase();
-            $query = $mysqli->prepare("SELECT COUNT(*) FROM user where username= ? OR  email= ? ") ;
+            $mysqli    =   App::dataBase();
+            $query     =   $mysqli->prepare("SELECT COUNT(*) FROM user where username= ? OR  email= ? ") ;
             App::prepare_method(2 , $query , "ss" , $userName , $email , "");
 
-            $result =  $query->get_result();
+            $result    =   $query->get_result();
 
-            $row = $result->fetch_assoc();  
+            $row       =   $result->fetch_assoc();  
 
-            $count =  $row["COUNT(*)"];
+            $count     =   $row["COUNT(*)"];
 
             if($result){
                 
@@ -33,8 +33,8 @@ class Signup_model {
 
                 }else{
  
-                    $query_1 = $mysqli->prepare("INSERT INTO user(username , password , email) VALUES ( ? , ? , ?)");
-                    $result_1 = App::prepare_method(3 , $query_1 , "sss" , $userName , $passWord , $email );
+                    $query_1    =    $mysqli->prepare("INSERT INTO user(username , password , email) VALUES ( ? , ? , ?)");
+                    $result_1   =    App::prepare_method(3 , $query_1 , "sss" , $userName , $passWord , $email );
                      
                     if($result_1){
 
@@ -56,7 +56,10 @@ class Signup_model {
 
          
             }else{
+
                 return die('Query faild!' .  mysqli_error(App::dataBase()));
+
+                
             }
         }
     }

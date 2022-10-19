@@ -20,59 +20,48 @@ PlansControl::insert("update");
 <html lang="en">
 <head>
 
-
- 
+    <?php include 'pageParts/head.php'; ?>
+    <title>Plannen updaten | Meesterproef</title>
      
 </head>
 <body>
 
+
+
     <header class="header">
-
     <?php include 'pageParts/header.php'; ?>
-
     </header>
+
+
+
 
     <article>
 
 
-    <form method="POST" action="update_plans.php">
+        <form method="POST" action="update_plans.php">
 
-        <?php if(isset( $_SESSION["user_name"])){
-
-
-               
-              
-        
-
-             
-            echo UpdateDelete::update($id);
-
-                
-                
-                
-                
-            }else{
-                echo '<h1> login pls!  </h1>';
-            }
-                
-        
-        
+            <?php 
             
-            ?>
-                
-              
-
-            </form>
-        
-        
-       
-           <?php
-
             
+                if(isset( $_SESSION["user_name"])){
+                    
+                    echo UpdateDelete::update($id);
 
+                    
+                }else{
+                    echo '<h1> login pls!  </h1>';
+                }
+                    
+                 
             ?>
+                    
+        </form>
+      
        
     </article>
+
+
+
 
     <footer>
         <?php include 'pageParts/footer.php'; ?>

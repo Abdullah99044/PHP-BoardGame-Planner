@@ -12,17 +12,17 @@ class UpdateDelete {
 
     public static function update($id){
  
-            $username = $_SESSION["user_name"];
+            $user_name = $_SESSION["user_name"];
             
             $user_id = App::select_user_id();
 
-            $game = Update_Delete_Model::update($id , $user_id );
+            $update_game_details = Update_Delete_Model::update($id , $user_id );
 
-        if(isset($id , $game)){
+        if(isset($id , $update_game_details)){
             
-            $game_name = $game['Game_ID'];
+            $game_name =  $update_game_details['Game_ID'];
 
-            return PlansControl::show_insert_boxes($game_name ,  $id  ,  $username ,"update" , $game);    
+            return PlansControl::show_insert_boxes($game_name ,  $id  , $user_name ,"update" , $update_game_details);    
              
         }else{
 
@@ -43,16 +43,16 @@ class UpdateDelete {
             if(isset($type , $_POST['name'] , $_POST['id'] , $_POST['player'])){
 
 
-                $name = $_POST['name'];
-                $id = $_POST['id'];
-                $player = $_POST['player'];
+                $game_name       =     $_POST['name'];
+                $plan_id         =     $_POST['id'];
+                $player_name     =     $_POST['player'];
                 
 
-                $name = App::mysql_escape($name);
-                $id = App::mysql_escape($id);
-                $player = App::mysql_escape($player);
+                $game_name       =     App::mysql_escape($game_name);
+                $plan_id         =     App::mysql_escape($plan_id);
+                $player_name     =     App::mysql_escape($player_name);
 
-                return Update_Delete_Model::add_update_Player($name   , $id , $player , $type);
+                return Update_Delete_Model::add_update_Player($game_name  , $plan_id, $player_name , $type);
 
             }else{
 

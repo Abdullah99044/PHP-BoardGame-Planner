@@ -13,12 +13,16 @@ echo Feedback::feedback();
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     
+    <?php include 'pageParts/head.php'; ?>
+    <title>Feedback | Meesterproef </title>
 </head>
 <body>
+
 
     <header class="header">
 
@@ -26,21 +30,26 @@ echo Feedback::feedback();
 
     </header>
 
+
+
     <article>
+
+
         <div>
 
-          
          <form  method="POST" action="" >
     
-            <textarea  name="feedback" rows="10" cols="50" required>
-
-            </textarea>
+            <textarea  name="feedback" rows="10" cols="50" required> </textarea>
             <input type="submit" value="submit" name="submit">
 
          </form>
         
         </div>
+
+
+
     </article>
+
 
     <footer>
         <?php require 'pageParts/footer.php'; ?>

@@ -1,17 +1,9 @@
- 
-
-
- <?php
+<?php
 
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.control.php';
 
-
  
-
- 
- 
-
 ?>
 
 
@@ -22,39 +14,43 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-
-    <title>Game website</title>
+    <title> Home | Meesterproef </title>
 </head>
+
+
 <body>
 
     <header class="header">
-
         <?php include 'app/views/pageParts/header.php'; ?>
-
     </header>
 
+
+
     <article>
-        <?php
-        ##<img src="/../../game/afbeeldingen/counterfeiters.jpg" alt="Italian Trulli"> ?>
         
+
         <div>
-            
-        <form action='app/views/loginPage.php' method='POST'> 
 
                 
-            <input   type='submit' value='login'>
-        </form> 
+            <form action='app/views/loginPage.php' method='POST'> 
 
-        <form action='/../../meesterproef/app/views/signUppage.php' method='POST'>;
+                <input   type='submit' value='login'>
 
-            <input   type='submit' value='signUp'> 
-    
-        </form> 
+            </form> 
+
+
+            <form action='/../../meesterproef/app/views/signUppage.php' method='POST'>;
+
+                <input   type='submit' value='signUp'> 
+        
+            </form> 
 
 
         </div>
 
-        <?php  
+
+
+    <?php  
 
         ####################################### filter ########################################
 
@@ -92,23 +88,20 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
 
             }
 
-            
-
-              
         }
-
-      
-        
-        ?>
-
-
+  
+    ?>
 
     </article>
+
+
 
    
     <footer>
         <?php include 'app/views/pageParts/footer.php'; ?>
     </footer>
+
+    
     
 </body>
 </html>

@@ -2,15 +2,9 @@
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_delete_plans.control.php';
 
- 
-  
-
 App::check_login(); 
 
-
-
 UpdateDelete::delete(); 
-
 
 $name =    $_SESSION["user_name"];
 
@@ -21,10 +15,12 @@ $name =    $_SESSION["user_name"];
 <html lang="en">
 <head>
 
- 
+    <?php include 'pageParts/head.php'; ?>
+    <title>Persoonlijk pagina | Meesterproef</title>
      
 </head>
 <body>
+
 
     <header class="header">
 
@@ -32,22 +28,22 @@ $name =    $_SESSION["user_name"];
 
     </header>
 
+
+
+
     <article>
+
         
-     
         <div>
 
-
-            <h1>Welcome  <?php  echo $name;
-            
-            
-            
-            
-            ?></h1>
+            <h1>Welcome  <?php  echo $name; ?></h1>
 
             <p>This page will let you edit delete and make your planning!</p>
 
         </div>
+
+
+
 
         <div>
 
@@ -58,6 +54,7 @@ $name =    $_SESSION["user_name"];
 
             </form>
 
+
             <form action="update_user_info_page.php" method="POST">
 
                 <input type="submit" name="submit" value="Updat your email">
@@ -65,36 +62,33 @@ $name =    $_SESSION["user_name"];
 
             </form>
 
+
             <form action="/../../meesterproef/app/views/reservePage.php" method="POST">
 
                 <input type='hidden' name='type' value='reserve'>
-                
-
                 <input type="submit" name="submit" value="Reserveren">
 
             </form>
+
             
             <form action="" method="POST">
 
                 <input type='hidden' name='logout' value='true'>
-                
                 <input onclick="myFunction()" type="submit" name="submit" value="Log out">
 
             </form>
 
-            <form action="/../../meesterproef/app/views/joinedGames.php" method="POST">
 
-                
+            <form action="/../../meesterproef/app/views/joinedGames.php" method="POST">
 
                 <input type="submit" name="submit" value="The games I joined">
 
             </form>
 
+
+
+
             <?php  
-
-             
- 
-
 
             if(isset( $_POST['logout'])){
 
@@ -123,20 +117,16 @@ $name =    $_SESSION["user_name"];
             
             ?>
 
-        </div>
 
-        
-
-       
+        </div>    
         
     </article>
 
-    <footer>
-        <?php 
 
-        require 'pageParts/footer.php';
-        
-        ?>
+
+
+    <footer>
+        <?php require 'pageParts/footer.php'; ?>
     </footer>
 
     

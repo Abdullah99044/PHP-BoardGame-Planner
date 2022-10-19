@@ -14,7 +14,8 @@ echo JoinPlan_control::quit_joined_games();
 <html lang="en">
 <head>
 
- 
+    <?php include 'pageParts/head.php'; ?>
+    <title>Games waaraan ik heb deelgenomen</title>
      
 </head>
 <body>
@@ -25,10 +26,12 @@ echo JoinPlan_control::quit_joined_games();
 
     </header>
 
+
+
+
     <article>
 
     <?php
-
 
         $list = FilterControl::show_joined_games();
         foreach( $list as $value){
@@ -36,13 +39,13 @@ echo JoinPlan_control::quit_joined_games();
             echo $value;
 
         }
-
-
-
     ?>
 
 
     </article>
+
+
+
 
     <footer>
         <?php 
