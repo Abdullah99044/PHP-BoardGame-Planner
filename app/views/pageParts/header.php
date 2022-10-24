@@ -15,22 +15,21 @@
 
   
             
-    <div  class="header">
+   
 
-        <div class="title">
-            <p><a  class="navlinls" href="/../../meesterproef/index.php" > Games planner</a></p>  
-        </div>
-
-
-        <div class="nav">
-        
+      
           
+        <a class="headerTitle" href="/../../meesterproef/index.php" >Game planner </a>  
+
+        <nav>
+        
+           
 
 
             <?php
 
 
-
+ 
 
             if(isset($_SESSION["isLogged"])){
 
@@ -38,13 +37,13 @@
 
             ?> 
     
-            <ul>
-                <li></li>
-                <li><a  class="navlinls" href="/../../meesterproef/index.php" >Home</a></li>
-                <li><a  class="navlinls" href='/../../meesterproef/app/views/personalPage.php'>Persoonlijk pagina</a></li>
-                <li><a  class="navlinls" href=''>Toegevoegde spellen</a></li>
-                <li><a  class="navlinls" href=''>settings</a></li>
-                <li><a  class="navlinls" href='/../../meesterproef/app/views/logoutPage.php'>Afmelden</a></li>
+            <ul class="headerNav">
+                <li><a  class="nav" href='/../../meesterproef/app/views/personalPage.php'>Persoonlijk pagina</a></li>
+                <li><a  class="nav"  href='/../../meesterproef/app/views/joinedGames.php'>Toegevoegde spellen</a></li>
+                <li><a  class="nav" class="drop" href='/../../meesterproef/app/views/updateUserInfo.php'>Update your info</a> </li>
+
+               
+                <li class="nav"><a  class="navlinks" href='/../../meesterproef/app/views/logoutPage.php'>Afmelden</a></li>
 
                
             </ul>
@@ -57,12 +56,12 @@
             ?>
 
 
-            <ul>
+            <ul class="headerNav">
 
-                <li></li>
-                <li><a class="navlinls" href="/../../meesterproef/index.php" > Home </a></li>
-                <li><a class="navlinls" href="/../../meesterproef/app/views/loginPage.php" > Login </a></li>
-                <li><a class="navlinls" href="/../../meesterproef/app/views/signUppage.php" > Aanmelden </a></li>
+                
+                <li><a  href="/../../meesterproef/index.php" > Home </a></li>
+                <li><a   href="/../../meesterproef/app/views/loginPage.php" > Login </a></li>
+                <li><a  href="/../../meesterproef/app/views/signUppage.php" > Aanmelden </a></li>
 
             </ul>
 
@@ -75,14 +74,12 @@
 
                 ?>
                     
-        
+         
            
 
-        </div>
+        </nav>
 
-
-    </div>
-
+ 
     
     
     

@@ -25,7 +25,7 @@ echo UpdateInfo::passwordUpdate();
     </header>
 
     
-    <article>
+    <article class="article">
 
         <form method="POST" action="">
 

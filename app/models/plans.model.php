@@ -262,17 +262,15 @@ class PlansModel {
     }
 
 
-
-
-
-
+ 
 
 
     #Deze functies gaan Plan Data ann de dataBase toevoegen
 
+  
  
 
-    public static function  insert($type , $id , $game_Name , $person_who_explains_game ,  $startTime , $play_time , $user_id , $game_id  ){
+    public static function  insert($type , $id , $game_Name , $person_who_explains_game ,  $startTime , $play_time , $user_id , $game_id , $players ){
 
         if($type == "update"){
             $id = $id;                
@@ -292,7 +290,7 @@ class PlansModel {
                 
                 if($query){
 
-                    $query->close();
+                    
                     $mysqli->close();
         
                 
@@ -318,7 +316,19 @@ class PlansModel {
             $query->execute();
               
             if($query){
+                
+                $plan_id_players   = $query->insert_id;
+                 
+                foreach($players as $value ){
 
+                    $query_players = $mysqli->prepare("INSERT INTO players( name , plan_id) VALUES( ? , ? ) ");
+                    App::prepare_method(2 , $query_players , "si" , $value , $plan_id_players , "");
+        
+                    
+                }
+        
+
+                $query_players->close();
                 $query->close();
                 $mysqli->close();
 

@@ -45,7 +45,7 @@ class UpdateDelete {
 
                 $game_name       =     $_POST['name'];
                 $plan_id         =     $_POST['id'];
-                $player_name     =     $_POST['player'];
+                $player_name     =     $_POST['player']; 
                 
 
                 $game_name       =     App::mysql_escape($game_name);

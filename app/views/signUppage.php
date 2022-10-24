@@ -21,13 +21,13 @@ echo SignUp_control::signUp();
 
 
 
-    <article>
+    <article class="article">
 
-        <form method="POST" action="signUppage.php">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="password" placeholder="Password" required>
-            <input type="text" name="email" placeholder="email" required>
-            <input type="submit" name="submit" value="signUp">
+        <form class="signUpBox" method="POST" action="signUppage.php">
+            <input class="SignUpInputText" type="text" name="username" placeholder="Username" required>
+            <input class="SignUpInputText" type="text" name="password" placeholder="Password" required>
+            <input class="SignUpInputText" type="text" name="email" placeholder="email" required>
+            <input class="signUpButtons" type="submit" name="submit" value="signUp">
         </form>
 
     </article>

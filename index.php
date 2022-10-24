@@ -26,17 +26,58 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
     <article class="article">
 
 
-    <?php  
 
-        ####################################### filter ########################################
+    <div class="filter">
 
-        echo FilterControl::select_filter(); # Kies een welke  spelen tijd wil je.
+     
+        <div class="filterform">
 
-        $list_filter = FilterControl::filter(); # Functie filter_control heeft twee uitkomst "false" of een lijst
+            <div class="filterContent">
 
-        #######################################################################################
+                <form  method='POST' action='' >  
+                
+                
+                    <select class='filterSelect' name='games_type' >  
+            
+                <?php  
+    
+                
+                    ####################################### filter ########################################
+
+                    echo FilterControl::select_filter(); # Kies een welke  spelen tijd wil je.
+
+                    # Functie filter_control heeft twee uitkomst "false" of een lijst
+
+                    #######################################################################################
+
+                ?>
+
+                        
+                    </select> 
+
+                
+
+                    <input  class="filterButtons" class="filtersss" class="filteSelectButton"   type='submit' value='select' name'submit' >  
+
+                </form> 
 
 
+                <form    method='POST' action='' >  
+
+                    <input type='hidden' name='filter_off' value='false' >  
+
+                    <input class="filterButtons" class="filteResetButton"   type='submit' value='resest' name'submit' >  
+
+                </form> 
+
+            </div>
+        </div>
+
+    </div>
+
+    <?php
+
+        $list_filter = FilterControl::filter();
         $list = PlansControl::readplans("everyone" , "public");
  
         if(FilterControl::filter() == false){

@@ -35,7 +35,7 @@ PlansControl::insert("update");
 
 
 
-    <article>
+    <article class="article">
 
 
         <form method="POST" action="update_plans.php">

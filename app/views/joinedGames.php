@@ -29,7 +29,7 @@ echo JoinPlan_control::quit_joined_games();
 
 
 
-    <article>
+    <article class="article">
 
     <?php
 

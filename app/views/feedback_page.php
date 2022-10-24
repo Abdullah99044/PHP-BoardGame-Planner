@@ -32,7 +32,7 @@ echo Feedback::feedback();
 
 
 
-    <article>
+    <article class="article">
 
 
         <div>

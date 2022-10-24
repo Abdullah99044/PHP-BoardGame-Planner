@@ -252,7 +252,24 @@ class PlansControl {
 
 
 
-            $_SESSION["numPlayers"] =  $max_players;
+            
+
+
+            $players_number = 0;
+
+            while($players_number !=  $max_players ){
+
+                $number       =   strval($players_number);
+                $label_number =   $players_number + 1;
+
+                $html_code   .=   " <br> <label> Player  $label_number :  </label> ";
+                $html_code   .=   " <input type='text' name='player$number'   > " ;
+
+                $players_number++;
+
+            }
+
+            $_SESSION["numPlayers"] =   $players_number;
 
 
                      
@@ -308,7 +325,7 @@ class PlansControl {
 
                
                 $user_id =  App::select_user_id();
-
+                $plan_id = $_POST["plan_id"];
                  
  
                 $person_who_explains_game = $_POST["maker"];
@@ -331,11 +348,26 @@ class PlansControl {
                 $game_id    =  $_POST['game_id'];
                 $game_id    =  App::mysql_escape($game_id);
 
-      
+                
+                $players = [];
 
-                $plan_id = $_POST["plan_id"];
+                $max_players        =   $_SESSION["numPlayers"];
+                $num                =   0;
+
+                while($num != $max_players){
+
+                    $players_number =   strval($num);
+                    $player         =   $_POST["player$players_number"];
+
+                    if(!empty($player)){
+                        array_push($players ,  $player );
+                    }
+
+                    $num++;
+
+                }   
  
-                return PlansModel::insert($opreation_type , $plan_id , $game_Name , $person_who_explains_game , $start_time , $play_time , $user_id , $game_id );
+                return PlansModel::insert($opreation_type , $plan_id , $game_Name , $person_who_explains_game , $start_time , $play_time , $user_id , $game_id , $players );
                  
             }
         }

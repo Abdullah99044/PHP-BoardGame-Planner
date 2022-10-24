@@ -31,7 +31,7 @@ echo JoinPlan_control::add_player($id);
 
 
 
-    <article>
+    <article class="article">
 
 
 

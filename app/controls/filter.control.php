@@ -26,11 +26,9 @@ class FilterControl {
 
         
         $htm_code = " ";
-
-        $htm_code .= "<form  method='POST' action='' > ";
-
-        $htm_code .=  "<select name='games_type' > ";
-      
+        
+        
+         
         foreach($game_types as  $key => $value){
 
 
@@ -40,19 +38,9 @@ class FilterControl {
  
         }
         
-        $htm_code .=  "</select> ";
+       
 
-        $htm_code .=  "<input type='submit' value='select' name'submit' > ";
-
-        $htm_code .=  "</form> ";
-
-        $htm_code .= " <form  method='POST' action='' > ";
-
-        $htm_code .=  "<input type='hidden' name='filter_off' value='false' > ";
-
-        $htm_code .=  "<input type='submit' value='resest' name'submit' > ";
-
-        $htm_code .=  "</form> ";
+       
 
         return $htm_code;
 

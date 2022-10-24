@@ -9,7 +9,7 @@ echo Login_control::login();
 
 
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <?php include 'pageParts/head.php'; ?>
@@ -27,16 +27,16 @@ echo Login_control::login();
 
 
 
-    <article>
+    <article >
         
-        <form method="POST" action="loginPage.php">
-            <input type="text" name="username" placeholder="Username"  required>
+        <form class="loginbox" method="POST" action="loginPage.php">
+            <input class="loginInputText" type="text" name="username" placeholder="Username"  required>
             
             
-            <input type="text" name="password" placeholder="Password"  required>
+            <input class="loginInputText" type="text" name="password" placeholder="Password"  required>
             
                 
-            <input type="submit" name="submit" value="login">
+            <input class="loginButton" type="submit" name="submit" value="login">
         </form>
  
     </article>

@@ -31,58 +31,29 @@ $name =    $_SESSION["user_name"];
 
 
 
-    <article>
+    <article class="article">
 
-        
-        <div>
+        <div class="personalPageHeader">
+          
+            <div >
+                <h1 class="personalPageHeaderH1" >Welcome  <?php  echo $name; ?></h1>
 
-            <h1>Welcome  <?php  echo $name; ?></h1>
+                <p class="personalPageHeaderP">This page will let you edit delete and make your planning!</p>
+            </div>
 
-            <p>This page will let you edit delete and make your planning!</p>
+            <div  >
+                <form action="/../../meesterproef/app/views/reservePage.php" method="POST">
 
-        </div>
+                    <input type='hidden' name='type' value='reserve'>
+                    <input class="personalPageHeaderButton" type="submit" name="submit" value="Maak een plan">
 
+                </form>
+            </div>
 
-
-
-        <div>
-
-            <form action="updatePassword.php" method="POST">
-
-                <input type="submit" name="submit" value="Updat your password">
-                <input type='hidden' name='Type' value='password'>
-
-            </form>
-
-
-            <form action="update_user_info_page.php" method="POST">
-
-                <input type="submit" name="submit" value="Updat your email">
-                <input type='hidden' name='Type' value='email'>
-
-            </form>
-
-
-            <form action="/../../meesterproef/app/views/reservePage.php" method="POST">
-
-                <input type='hidden' name='type' value='reserve'>
-                <input type="submit" name="submit" value="Reserveren">
-
-            </form>
-
+          
             
-            <form action="/../../meesterproef/app/views/logoutPage.php" method="POST">
-
-                <input onclick="myFunction()" type="submit" name="submit" value="Log out">
-
-            </form>
-
-
-            <form action="/../../meesterproef/app/views/joinedGames.php" method="POST">
-
-                <input type="submit" name="submit" value="The games I joined">
-
-            </form>
+        </div>
+        <div>
 
 
 
@@ -117,7 +88,9 @@ $name =    $_SESSION["user_name"];
             ?>
 
 
-        </div>    
+             
+
+        </div>
         
     </article>
 

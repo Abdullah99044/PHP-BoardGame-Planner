@@ -46,7 +46,7 @@ if(!isset($_GET['id'], $_GET['name'] , $_GET['type'])){
 
 
 
-    <article>
+    <article class="article">
 
     
         <form method="POST" action=" ">
