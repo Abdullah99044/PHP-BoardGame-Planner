@@ -322,12 +322,21 @@ class App {
 
     
         $details              =    "";
-        $details             .=    "<h2> $name_of_the_game </h2> <br> ";
-        $details             .=    "<img src='/../../game/afbeeldingen/$image' alt=$name_of_the_game  width='200' > ";
-        $details             .=    "<br>  $youtube  <p> $description  <br> <a href='$url'> to the game </a>  <br>  ";
-        $details             .=    "Expansions : $expansions Skills : $skills <br> Min players : $min_players ";
-        $details             .=    " <br> Max players : $max_players <br>  Explain minutes :  $explain_minutes  ";
-        $details             .=    "<br> Play minutes : $play_minutes </p> ";
+        $details             .=    "<div class='gameDetailsBox' >  ";
+        $details             .=    "    <div> ";
+        $details             .=    "        <h2> $name_of_the_game </h2> <br> ";
+        $details             .=    "        <img src='/../../game/afbeeldingen/$image' alt=$name_of_the_game  width='200' > ";
+        $details             .=    "        <p> $description  <br> <a href='$url'> to the game </a> </p> <br> ";
+        $details             .=    "    </div> ";
+        $details             .=    "    <div> ";
+        $details             .=    "        <p>  Expansions : $expansions Skills : $skills <br> Min players : $min_players ";
+        $details             .=    "        <br> Max players : $max_players <br>  Explain minutes :  $explain_minutes  ";
+        $details             .=    "        <br> Play minutes : $play_minutes  </p> ";
+        $details             .=    "    </div> ";
+        $details             .=    "    <div> ";
+        $details             .=    "        <br>  $youtube    ";
+        $details             .=    "    </div> ";
+        $details             .=    "</div> ";
 
         
         return $details;

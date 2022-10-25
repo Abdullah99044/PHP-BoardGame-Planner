@@ -27,7 +27,7 @@ echo SignUp_control::signUp();
             <input class="SignUpInputText" type="text" name="username" placeholder="Username" required>
             <input class="SignUpInputText" type="text" name="password" placeholder="Password" required>
             <input class="SignUpInputText" type="text" name="email" placeholder="email" required>
-            <input class="signUpButtons" type="submit" name="submit" value="signUp">
+            <input class="signUpButton" type="submit" name="submit" value="signUp">
         </form>
 
     </article>

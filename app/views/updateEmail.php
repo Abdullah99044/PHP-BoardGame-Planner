@@ -29,15 +29,15 @@ echo UpdateInfo::emailUpdate();
     <article class="article">
 
 
-        <form method="POST" action="">
+        <form class="updateEmailBox" method="POST" action="">
 
-            <label for="password">Write your curnet email <br> </label>
-            <input type="text" name="email" placeholder="email" required>
+           
+            <input class="updateEmailTextInput" type="text" name="email" placeholder="Write your curnet email" required>
             <label><br></label>
 
-            <label for="newEmail">Write your new email <br></label>
-            <input type="text" name="newEmail" placeholder="New email" required>
-            <input type="submit" onclick="myFunction()" name="submit" value="update">
+         
+            <input class="updateEmailTextInput" type="text" name="newEmail" placeholder="Write your new email" required>
+            <input class="updateEmailButton" type="submit" onclick="myFunction()" name="submit" value="update">
 
 
         </form>

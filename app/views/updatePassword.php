@@ -27,14 +27,14 @@ echo UpdateInfo::passwordUpdate();
     
     <article class="article">
 
-        <form method="POST" action="">
+        <form class="updatePassBox" method="POST" action="">
 
-            <label for="username">Write your curnet password <br></label>
-            <input type="text" name="password" placeholder="Password" required>
+          
+            <input class="updatePassTextInput" type="text" name="password" placeholder="Write your curnet password" required>
             <label ><br></label>
-            <label for="password">Write your new password <br></label>
-            <input type="text" name="newPassword" placeholder="newPassword" required>
-            <input type="submit" name="submit"  onclick="myFunction()" value="update">
+            
+            <input class="updatePassTextInput" type="text" name="newPassword" placeholder="Write your new password " required>
+            <input class="updatePassButton" type="submit" name="submit"  onclick="myFunction()" value="update">
 
         </form>
 

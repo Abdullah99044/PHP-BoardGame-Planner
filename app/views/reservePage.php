@@ -32,9 +32,9 @@ echo PlansControl::insert("reserve");
     <?php if(isset( $_SESSION["user_name"])){ ?>
 
 
-        <form method="POST" action="reservePage.php">
+        <form class="selectGameBox" method="POST" action="reservePage.php">
 
-            <select name="game_name" >
+            <select class="selectGame" name="game_name" >
                 
                 <?php 
 
@@ -51,7 +51,7 @@ echo PlansControl::insert("reserve");
 
             </select>
 
-            <input type="submit" name="submit" value="submit">
+            <input class="reserverenButton" type="submit" name="submit" value="submit">
 
         </form>
 

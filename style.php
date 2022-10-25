@@ -437,6 +437,219 @@ nav ul li {
      
 }
 
+
+/* update email page style */
+
+
+.updateEmailBox{
+    display: block;
+    width: 30%;
+    height: 28vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+    border: 0.5vw solid purple ;
+    border-radius: 20px 20px;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+
+}
+
+.updateEmailTextInput{
+    
+    display: block;
+    float: left;
+    width: 100%;
+    height: 5vw;
+
+    padding-left: 1vw;
+    font-size: 1.8vw;
+    
+
+    border-radius: 20px 20px;
+    border: 0.2vw solid purple;
+    margin-top: 2.5vw;
+    
+
+}
+
+.updateEmailButton{
+    display: block;
+    float: left;
+   
+    width: 60%;
+    height: 5vw;
+    border: 0.2vw solid purple;
+    border-radius: 40px 40px;
+     
+     
+    background-color: white;
+    font-size: 1.5vw;
+
+    margin-top: 3vw;
+    margin-right: 0vw;
+    margin-left: 5vw;
+
+  
+    
+ 
+    
+}
+
+.updateEmailButton:hover{
+    background-color: purple;
+    color: white;
+}
+
+
+/* update password page style */
+
+
+.updatePassBox{
+    display: block;
+    width: 30%;
+    height: 28vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+    border: 0.5vw solid purple ;
+    border-radius: 20px 20px;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+
+}
+
+.updatePassTextInput{
+    
+    display: block;
+    float: left;
+    width: 100%;
+    height: 5vw;
+
+    padding-left: 1vw;
+    font-size: 1.8vw;
+    
+
+    border-radius: 20px 20px;
+    border: 0.2vw solid purple;
+    margin-top: 2.5vw;
+    
+
+}
+
+.updatePassButton{
+    display: block;
+    float: left;
+   
+    width: 60%;
+    height: 5vw;
+    border: 0.2vw solid purple;
+    border-radius: 40px 40px;
+     
+     
+    background-color: white;
+    font-size: 1.5vw;
+
+    margin-top: 3vw;
+    margin-right: 0vw;
+    margin-left: 5vw;
+
+  
+    
+ 
+    
+}
+
+.updatePassButton:hover{
+    background-color: purple;
+    color: white;
+}
+
+
+/* Reserveen page style */
+
+.selectGameBox{
+    display: block;
+    height: 15vw;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    border: 0.5vw solid purple;
+    border-radius: 100px 100px;
+    margin-top: 3vw;
+    margin-bottom: 9vw;
+}
+
+
+.selectGame{
+    display: block;
+    height: 3.4vw;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid purple;
+    border-radius: 20px 20px;
+    font-size: 1.2vw;
+    padding-left: 1vw;
+    margin-top: 3vw;
+ }
+
+
+ .reserverenButton{
+    display: block;
+   
+   
+    width: 15vw;
+    height: 4vw;
+    border: 0.2vw solid purple;
+    border-radius: 40px 40px;
+     
+     
+    background-color: white;
+    font-size: 1.5vw;
+
+    margin-top: 2vw;
+    margin-right: auto;
+    margin-left: auto;
+
+  
+    
+ 
+    
+}
+
+.reserverenButton:hover{
+    background-color: purple;
+    color: white;
+}
+
+/* Game details style */
+
+.gameDetailsBox{
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #AF0891;
+    color: white;
+    border: 2px solid white;
+    border-radius: 40px 40px;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+}
+
+.gameDetailsBox h2{
+    font-size: 4vw;
+    text-align: center;
+    margin-bottom: 2vw;
+    text-shadow: 2px 2px 5px black;
+}
+
 </style>
 
  
