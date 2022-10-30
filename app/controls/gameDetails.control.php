@@ -5,7 +5,7 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\gameDetails.m
 
 
 
-class GameDetails_Control  extends PlansControl{
+class GameDetails_Control  extends PlansControl{ 
 
     public static function get_gamesDetails($game)
     {

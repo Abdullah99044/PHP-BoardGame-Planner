@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-
+error_reporting(0);
+ini_set('display_errors', 0);
 
 
 
@@ -323,19 +324,47 @@ class App {
     
         $details              =    "";
         $details             .=    "<div class='gameDetailsBox' >  ";
-        $details             .=    "    <div> ";
-        $details             .=    "        <h2> $name_of_the_game </h2> <br> ";
-        $details             .=    "        <img src='/../../game/afbeeldingen/$image' alt=$name_of_the_game  width='200' > ";
-        $details             .=    "        <p> $description  <br> <a href='$url'> to the game </a> </p> <br> ";
+
+
+        $details             .=    "    <h2> $name_of_the_game </h2> <br> ";
+
+
+        $details             .=    "    <div class='divImageDescription' > ";
+
+       
+        $details             .=    "        <div class='gameDetailsImage'> ";
+
+        $details             .=    "            <img  src='/../../game/afbeeldingen/$image' alt=$name_of_the_game  class='imageGame'  > ";
+
+        $details             .=    "        </div> ";
+
+        $details             .=    "        <div class='gameDetailsDescription'> ";
+
+        $details             .=    "            <p> $description  <br> <a href='$url'> to the game </a> </p> <br> ";
+
+        $details             .=    "        </div> ";
+
         $details             .=    "    </div> ";
-        $details             .=    "    <div> ";
-        $details             .=    "        <p>  Expansions : $expansions Skills : $skills <br> Min players : $min_players ";
-        $details             .=    "        <br> Max players : $max_players <br>  Explain minutes :  $explain_minutes  ";
-        $details             .=    "        <br> Play minutes : $play_minutes  </p> ";
+
+        $details             .=    "    <div class='gameRulesYoutube' > ";
+
+        $details             .=    "            <div class='youtubeBox' > ";
+
+        $details             .=    "                <br>  <div class='youtubeFrame'  >   $youtube  </div>   ";
+
+        $details             .=    "            </div> ";
+
+        $details             .=    "        <div class='gameDetailsRules'> ";
+
+        $details             .=    "            <p>  Expansions : $expansions <br> Skills : $skills <br> Min players : $min_players ";
+        $details             .=    "            <br> Max players : $max_players <br>  Explain minutes :  $explain_minutes  ";
+        $details             .=    "            <br> Play minutes : $play_minutes  </p> ";
+      
+        $details             .=    "        </div> ";
+
         $details             .=    "    </div> ";
-        $details             .=    "    <div> ";
-        $details             .=    "        <br>  $youtube    ";
-        $details             .=    "    </div> ";
+       
+        
         $details             .=    "</div> ";
 
         

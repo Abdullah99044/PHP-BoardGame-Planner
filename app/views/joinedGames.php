@@ -35,8 +35,16 @@ echo JoinPlan_control::quit_joined_games();
 
         $list = FilterControl::show_joined_games();
         foreach( $list as $value){
+        
+        ?>
 
-            echo $value;
+        <div class="plansBox"> 
+
+         <?php   echo $value;   ?>
+
+        </div>
+
+        <?php
 
         }
     ?>

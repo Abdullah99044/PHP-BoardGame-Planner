@@ -76,8 +76,16 @@ $name =    $_SESSION["user_name"];
                 if($list != "No plans yet" ){
 
                     foreach($list as $value){
+                    
+                    ?>
 
-                        echo $value;
+                    <div class="plansBox"> 
+                        <?php echo $value; ?>
+
+                    </div>
+
+                    <?php
+                     
                     }
 
                 }else{

@@ -624,23 +624,25 @@ nav ul li {
 }
 
 .reserverenButton:hover{
-    background-color: purple;
+    background-color:  #AF0891;
+    border-color:  #AF0891;
     color: white;
 }
 
 /* Game details style */
 
-.gameDetailsBox{
+.gameDetailsBox{ 
     display: block;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     background-color: #AF0891;
-    color: white;
+    color: black;
     border: 2px solid white;
     border-radius: 40px 40px;
-    padding: 1vw;
+    padding: 2vw;
     box-shadow: 2px 2px 5px black;
+    
 }
 
 .gameDetailsBox h2{
@@ -648,6 +650,466 @@ nav ul li {
     text-align: center;
     margin-bottom: 2vw;
     text-shadow: 2px 2px 5px black;
+    color: white;
+}
+
+
+.divImageDescription{
+
+    display:   inline-block;
+    width: 100%;
+    height: 50%;
+    margin-bottom: 3vw;
+    
+
+}
+.gameDetailsImage {
+    float: left;
+    display: inline block;
+    width: 20%;
+    height: 90%;
+}
+
+.imageGame {
+    height: auto;
+    width: 80%;
+}
+.gameDetailsDescription{
+    float: left;
+    display: inline block;
+    width: 80%;
+    margin-top: 2vw;
+    font-size: 1.3vw;
+    height: 90%;
+    background-color: white;
+    border: #AF0891 solid 1px;
+    border-radius: 20px 20px;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+
+}
+
+.gameRulesYoutube{
+    width: 100%;
+    display: inline-block;
+    height: 50%;
+}
+
+.youtubeBox{
+
+    float: left;
+    width: 70%;
+    
+ }
+
+.youtubeFrame{
+    height: auto;
+    width: 80%;
+
+ }
+ 
+.gameDetailsRules{
+    float: left;
+    width: 30%;
+    margin-top: 1vw;
+    background-color: white;
+    border: #AF0891 solid 1px;
+    border-radius: 20px 20px;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+    font-size: 1.3vw;
+ }
+
+
+ /* Game details reservern forms style */
+
+
+.reservernFormsBox{
+    display: block;
+    width: 90%;
+    margin-top: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #AF0891;
+    color: black;
+    border: 2px solid white;
+    border-radius: 40px 40px;
+    padding: 2vw;
+    box-shadow: 2px 2px 5px black;
+}
+
+
+.reservernFormsBox h1{
+    font-size: 4vw;
+    text-align: center;
+    margin-bottom: 2vw;
+    text-shadow: 2px 2px 4px black;
+    color: white;
+}
+
+
+.inputBox{
+    display: block;
+    width: 60%;
+    height: 28vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+     
+}
+
+.inputStyle{
+    display: block;
+    background-color: white;
+    width: 60%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vw;
+    border: 0.2vw solid purple;
+    border-radius: 100px 100px;
+    box-shadow: 1px 1px 3px black;
+    padding: 1vw;
+
+}
+
+.inputStyle input{
+    border: 0.1vw solid purple;
+    border-radius: 100px 100px;
+    width: 60%;
+    padding: 1vw;
+    font-size: 1.3vw;
+
+}
+
+.inputStyle label{
+    font-size: 1.5vw;
+}
+
+.reserveButton{
+    display: block;
+   
+   
+    width: 20%;
+    height: 5vw;
+    border: 0.2vw solid purple;
+    border-radius: 40px 40px;
+     
+     
+    background-color: white;
+    font-size: 1.5vw;
+
+    margin-top: 3vw;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 1px 1px 2px black;
+    color: purple;
+  
+    
+ 
+    
+}
+
+.reserveButton:hover{
+    background-color: #AF0891 ;
+    color: white;
+    border: 0.2vw solid  #AF0891;
+}
+
+/* game details informatie over het plan */
+
+
+.planInfoBox{
+    display: inline-block;
+    width: 90%;
+    margin-top: 10vw;
+    margin-left: 5vw;
+    margin-right: auto;
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    border-radius: 40px 40px;
+    padding: 2vw;
+    box-shadow: 2px 2px 5px black;
+    font-size: 1.2vw;
+    
+
+}
+
+.planInfoBox h1{
+    color: #AF0891;
+    font-size: 3vw;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+}
+
+.planInfo {
+
+    padding: 1vw;
+
+}
+
+.planInfo h2 {
+    color: #AF0891;
+}
+
+
+.zelfToevogenButton {
+
+    display: inline-block;
+  
+    width: 100%;
+    margin-left: 28vw;
+    margin-right: auto;
+    
+}
+
+
+.zelfToevogenButton input{
+    float: left;
+    width: 30%;
+   
+   
+    text-align: center;
+    color: white;
+    background-color: purple;
+    font-size: 2vw;
+   
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+     
+    padding: 1vw;
+}
+
+
+.zelfToevogenButton input:hover{
+    background-color: #AF0891 ;
+
+
+}
+/* plannen tonen in index pagina style */
+
+
+.plansBox{
+    display: inline-block;
+    width: 80%;
+     
+    margin-left: 10vw;
+    margin-right: auto;
+
+    margin-bottom: 2vw;
+
+    border: 2px solid purple;
+    background-color:  #AF0891 ;
+    padding: 1vw;
+
+    border-radius: 2vw;
+
+}
+
+.plansBox h1{
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+    text-shadow: 2px 2px 4px black;
+    margin-bottom: 5vw;
+}
+
+.plansBox h1 a{
+    color: white;
+    
+}
+.plansBox h1 a:hover{
+    color: #F707CC ;
+}
+
+.plansBoxImage{
+
+   
+    float: left;
+    padding: 1vw;
+    width: 20%;
+    height: auto;
+    margin-bottom: 2vw;
+
+    
+
+}
+
+.plansBox p {
+    float: left;
+    width: 35%;
+    margin: 4vw 2vw 2vw 2vw;
+    background-color: white;
+    border: #AF0891 solid 1px;
+    border-radius: 20px 20px;
+    padding: 1vw;
+    box-shadow: 2px 2px 5px black;
+    font-size: 1.3vw;
+}
+ 
+.playersTabel{
+    
+    float: left;
+    width: 30%;
+    
+    margin: 4vw 2vw 2vw 2vw;
+    background-color: white;
+    border: #AF0891 solid 1px;
+    border-radius: 20px 20px;
+    padding: 1vw; 
+    box-shadow: 2px 2px 5px black;
+    font-size: 1.3vw;
+}
+
+
+.playersTabel h2{
+
+    padding-bottom: 1vw;
+    border-bottom: 2px solid purple;
+    font-size: 2.5vw;
+    color: purple;
+    text-align: center;
+
+}
+
+/* Plannen Bwerken style */
+
+.adminButtonsBox{
+
+    display: block;
+    width: 90%;
+    height: 3vw;
+    padding: 1vw;
+    margin-left: auto;
+    margin-right: auto;
+   
+
+}
+
+.adminButtonUpdate{
+    float: left;
+    width: 40%;
+    height: 2vw;
+    text-align: center;
+    color: white;
+    background-color: purple;
+    font-size: 1.2vw;
+    padding-top: 0.3vw;
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+    
+}
+
+
+.adminButtonDelete{
+    float: left;
+    width: 40%;
+    height: 2vw;
+    text-align: center;
+    color: white;
+    background-color: purple;
+    border: 0px;
+    font-size: 1.2vw;
+    margin-left: 1vw;
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+}
+
+.adminButtonUpdate:hover , .adminButtonDelete:hover{
+
+    background-color: #CA0CA8 ;
+     
+}
+ 
+
+.adminPlanBox{
+    float: left;
+    width: 32%;
+    
+    margin: 4vw 2vw 2vw 2vw;
+    background-color: white;
+    border: #AF0891 solid 1px;
+    border-radius: 20px 20px;
+    padding: 1vw; 
+    box-shadow: 2px 2px 5px black;
+    font-size: 1.3vw;
+}
+
+
+.adminPlanBox h2{
+
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+    text-align: center;
+    color: purple;
+    padding-bottom: 1vw;
+    border-bottom: 2px solid purple;
+    font-size: 2.5vw;
+
+}
+
+
+.adminPlanBox a , .adminPlanBox input  {
+     
+    display: block;
+    float: left;
+    width: 100%;
+    height: 2vw;
+    text-align: center;
+    color: white;
+    background-color: purple;
+    font-size: 1.2vw;
+    padding-top: 0.3vw;
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+    margin-bottom: 1vw;
+}
+
+.adminPlanBox a:hover , .adminPlanBox input:hover  {
+
+    background-color: #CA0CA8 ;
+    
+}
+
+/* Toegvoegd planen style */
+
+
+.deletBox {
+
+    display: inline-block;
+
+    width: 100%;
+    
+}
+
+
+.deletBox input{
+    float: left;
+    width: 30%;
+
+
+    margin-left: 26vw;
+    margin-right: auto;
+
+
+    text-align: center;
+    color: white;
+    background-color: purple;
+    font-size: 2vw;
+
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+    
+    padding: 1vw;
+}
+
+
+.deletBox input:hover{
+    background-color: #CA0CA8 ;
+
+
 }
 
 </style>

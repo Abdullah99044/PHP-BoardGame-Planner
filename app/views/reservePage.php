@@ -57,7 +57,7 @@ echo PlansControl::insert("reserve");
 
 
 
-        <form method="POST" action="reservePage.php">
+        <form   method="POST" action="reservePage.php">
 
         <?php 
         

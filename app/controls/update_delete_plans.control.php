@@ -33,7 +33,7 @@ class UpdateDelete {
 
     }
 
-
+ 
 
     
     public static function add_update_Player($type){

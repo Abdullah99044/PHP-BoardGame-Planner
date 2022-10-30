@@ -75,39 +75,59 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
 
     </div>
 
-    <?php
+    
+        
+        <?php
 
-        $list_filter = FilterControl::filter();
-        $list = PlansControl::readplans("everyone" , "public");
- 
-        if(FilterControl::filter() == false){
+            $list_filter = FilterControl::filter();
+            $list = PlansControl::readplans("everyone" , "public");
+    
+            if(FilterControl::filter() == false){
 
-            foreach( $list as $value){
+                foreach( $list as $value){
+                
+                ?>
 
-                echo $value;
+                <div class="plansBox"> 
+                 
+                    <?php echo $value; ?>
 
-            }
+                </div>
 
-        }else{
+                <?php
 
-            
-           if($list_filter  == "No plans"){
+                }
 
-            echo "No plans";
-             
             }else{
 
-                foreach(  $list_filter as $value){
+                
+            if($list_filter  == "No plans"){
 
-                    echo  $value;
+                echo "No plans";
+                
+                }else{
+
+                    foreach(  $list_filter as $value){
+                    
+                    ?>
+
+                    <div class="plansBox"> 
+
+                       <?php echo  $value; ?>
+
+                    </div>
+
+                    <?php
+
+                    }
 
                 }
 
             }
+    
+        ?>
 
-        }
-  
-    ?>
+    </div>
 
     </article>
 

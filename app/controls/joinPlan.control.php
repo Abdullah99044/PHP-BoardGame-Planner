@@ -35,11 +35,6 @@ class JoinPlan_control {
                         $html .= " </form> ";
 
                         return  $html ;
-
-                    }else{
-
-                        return "You are Already in";
-
                     }
 
                 }else{

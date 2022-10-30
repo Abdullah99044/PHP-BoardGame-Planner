@@ -43,20 +43,39 @@ echo JoinPlan_control::add_player($id);
 
 
 
-        <div>
+        <div class="planInfoBox">
 
-        <?php 
+            <h1>Plan details</h1>
 
-        
-        if(!empty( $_SESSION["user_name"]) && $_SESSION["login"] != true){
+            <?php 
 
-            echo GameDetails_Control::getPlan($id); 
+            
+            ?>
 
-            echo JoinPlan_control::joinPlan($id  , $game);
-        }
+            <div class="planInfo">
+
+                <?php echo GameDetails_Control::getPlan($id);   
+
+          
+
+            
+
+                if(!empty( $_SESSION["user_name"]) && $_SESSION["isLogged"] == true){
+
+                    ?>
 
 
-        ?>
+                    <div class="zelfToevogenButton">
+
+                    <?php   echo JoinPlan_control::joinPlan($id  , $game);
+                }
+
+
+                ?>
+
+                    </div>
+            
+            </div>
 
         
         </div>
