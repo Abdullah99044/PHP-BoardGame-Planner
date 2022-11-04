@@ -23,7 +23,7 @@ class JoinPlan_control {
 
                 $is_full = JoinPlan_model::join_bolean($plan_id ,$max_players);
 
-                if($is_full == "not full"){
+                if($is_full == "Niet vol"){
 
                     $is_player_in_the_game = JoinPlan_model::check_player_in_game($plan_id);
 
@@ -31,14 +31,21 @@ class JoinPlan_control {
 
                         $html = " "; 
                         $html .= " <form action='' method='POST'> ";
-                        $html .= " <input  onclick='myFunction()' type='submit' value='Add yourself' name='add_player' > ";
+                        $html .= "      <input  onclick='myFunction()' type='submit' value='Add yourself' name='add_player' > ";
                         $html .= " </form> ";
 
                         return  $html ;
                     }
 
                 }else{
-                    return " its full";
+
+
+                    $html        =      "";
+                    $html       .=      "<div> ";
+                    $html       .=          " <p> Dit plan is vol </p> ";
+                    $html       .=      "</div> ";
+
+                    return $html;
                 }
 
             }
@@ -46,7 +53,7 @@ class JoinPlan_control {
         }else{
 
             return "Something wrong";
-
+ 
         }
     }
     

@@ -316,23 +316,27 @@ class PlansModel {
             $query->execute();
               
             if($query){
-                
+                 
                 $plan_id_players   = $query->insert_id;
                  
-                foreach($players as $value ){
+                if(!empty($players)){
+                    foreach($players as $value ){
 
-                    $query_players = $mysqli->prepare("INSERT INTO players( name , plan_id) VALUES( ? , ? ) ");
-                    App::prepare_method(2 , $query_players , "si" , $value , $plan_id_players , "");
-        
-                    
+                        $query_players = $mysqli->prepare("INSERT INTO players( name , plan_id) VALUES( ? , ? ) ");
+                        App::prepare_method(2 , $query_players , "si" , $value , $plan_id_players , "");
+            
+                        
+                    }
+            
+
+                    $query_players->close();
+                   
                 }
-        
+                
 
-                $query_players->close();
                 $query->close();
                 $mysqli->close();
-
-
+                
                 return header('Location: /../../meesterproef/app/views/feedback_page.php?type=reserveren');
 
             }else{

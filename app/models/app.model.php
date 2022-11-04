@@ -1,12 +1,12 @@
 <?php
 
 session_start();
+
 error_reporting(0);
 ini_set('display_errors', 0);
 
 
-
-
+ 
 class App {
 
     private static $server_name     =  'localhost' ;
@@ -55,13 +55,13 @@ class App {
 
     public static function check_login(){
 
-        if(!isset($_SESSION["user_name"]) && $_SESSION["isLogged"] != true){
+        if(isset($_SESSION["user_name"]) &&  $_SESSION["isLogged"] == TRUE){
 
-            return header('Location: /../../meesterproef/index.php');
+            return true;
         
         }else{
 
-            return true;
+            return header('Location: /../../meesterproef/index.php');
         }
     }
 
@@ -81,7 +81,7 @@ class App {
     }
 
 
-
+ 
 
 
     public static function select_user_id(){

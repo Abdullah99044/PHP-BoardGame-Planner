@@ -16,7 +16,7 @@ echo Feedback::feedback();
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
     <?php include 'pageParts/head.php'; ?>
     <title>Feedback | Meesterproef </title>
@@ -35,12 +35,12 @@ echo Feedback::feedback();
     <article class="article">
 
 
-        <div>
+        <div class="feedbackbox" >
 
          <form  method="POST" action="" >
     
-            <textarea  name="feedback" rows="10" cols="50" required> </textarea>
-            <input type="submit" value="submit" name="submit">
+            <textarea class="feedbackInputText" name="feedback" rows="10" cols="50" required> </textarea>
+            <input    class="feedbackInputButton" type="submit" value="submit" name="submit">
 
          </form>
         

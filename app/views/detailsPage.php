@@ -10,8 +10,7 @@ $id = App::mysql_escape($id);
 $game = $_GET['game']; 
 $game = mysqli_real_escape_string(App::dataBase() ,   $game);  
 
- 
-echo JoinPlan_control::add_player($id);
+JoinPlan_control::add_player($id);  
  
 ?> 
 
@@ -33,7 +32,7 @@ echo JoinPlan_control::add_player($id);
 
     <article class="article">
 
-
+         
 
         <div>
          
@@ -54,7 +53,7 @@ echo JoinPlan_control::add_player($id);
 
             <div class="planInfo">
 
-                <?php echo GameDetails_Control::getPlan($id);   
+                <?php echo GameDetails_Control::getPlan($id);    
 
           
 

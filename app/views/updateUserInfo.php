@@ -25,9 +25,9 @@ App::check_login();
 
         <div class="anchorBox" >
 
-            <a class="pageButtons" href="updatePassword.php">Update password</a>
+            <a   class="pageButtons" href="updatePassword.php" >Wachtwoord updaten </a>
 
-            <a   class="pageButtons" class="updateEmaillink" href="updateEmail.php">Update email</a>
+            <a   class="pageButtons" class="updateEmaillink" href="updateEmail.php"> Email updaten </a>
 
         </div>
 

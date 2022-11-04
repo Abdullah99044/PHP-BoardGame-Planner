@@ -4,7 +4,7 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\app.model.php
 
 
 
-class Login_Model {
+class Login_Model { 
 
     public static function login($username , $password){
 
@@ -30,13 +30,12 @@ class Login_Model {
  
                     $_SESSION["user_name"] = $username;  
                     $_SESSION["isLogged"] = TRUE ;
-                     
-                    return header('Location: /../../meesterproef/app/views/personalPage.php');
+
+                    return true;
 
                 }else{
 
-                    $_SESSION["isLogged"] = FALSE ;
-                    return  "<h1> Login failed  . Invalid username or password  .</h1>";  
+                    return false;
 
                 }
 

@@ -41,7 +41,7 @@ class PlansControl {
         $max_players      =  $game_details['max_players'];
 
          
-        $is_full = JoinPlan_model::join_bolean($plan_id , $max_players);
+        $is_full = JoinPlan_model::join_bolean($plan_id , $max_players); 
 
         $html_code = " ";
 
@@ -54,17 +54,18 @@ class PlansControl {
             
         }
 
-        $html_code .= "  <p> Start time : $start_time      <br> ";
-        $html_code .= "     The orgnaiser :  $name_of_the_orgnaiser  <br> " ;
-        $html_code .= "     Explain Time :   $play_time   <br> " ;
-        $html_code .= "     Play Time :  $explain   <br> </p> " ;
+        $html_code .= "<p>  Start tijd                         :  $start_time                 <br> ";
+        $html_code .= "     Speler die zal het spel  uitleggen :  $name_of_the_orgnaiser      <br> ";
+        $html_code .= "     Uitliggen tijd                     :  $play_time                  <br> ";
+        $html_code .= "     Spel tijd                          :  $explain               <br> </p> ";
 
         if($type_user == "admin"){  
                 
-            $html_code     .= "<div class='adminPlanBox' > ";
-            $html_code     .= "<h2>Bewerk jouw plan </h2> ";
-            if($is_full == "not full"){
-                $html_code .= "   <a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$game_name&id=$plan_id&type=add'>       add player  </a>  <br>";
+            $html_code     .=   "<div class='adminPlanBox' > ";
+            $html_code     .=   "<h2>Bewerk uw plan </h2> ";
+
+            if($is_full    ==   "Niet vol"){
+                $html_code .=   "<a href='/../../meesterproef/app/views/add_updatePlayer.php?name=$game_name&id=$plan_id&type=add'>  Speler toevoegen  </a>  <br>";
             }
 
             $html_code .= self::update_delete_plan($plan_id);
@@ -112,7 +113,7 @@ class PlansControl {
             if($players_num != 0){
 
                 $html_code .=   "<div class='playersTabel'> ";
-                $html_code .=   "<h2> Players : ( $players_num ) </h2> ";
+                $html_code .=   "<h2> Spelers : ( $players_num ) </h2> ";
 
                 $players_list = PlansModel::players($plan_id);
 
@@ -127,7 +128,7 @@ class PlansControl {
                     if($user_type == "admin"){  
 
                         $html_code .= "<div class='adminButtonsBox'> ";
-                        $html_code .= "     <a class='adminButtonUpdate' href='/../../meesterproef/app/views/add_updatePlayer.php?name=$player_name&id=$plan_id&type=update'>  Update </a> ";
+                        $html_code .= "     <a class='adminButtonUpdate' href='/../../meesterproef/app/views/add_updatePlayer.php?name=$player_name&id=$plan_id&type=update'>  Updaten </a> ";
 
                         
 
@@ -136,24 +137,26 @@ class PlansControl {
                         $html_code .= "         <input type='hidden' name='player_name' value='$player_name'> ";  
                         $html_code .= "         <input type='hidden' name='player_id'   value='$player_id'> ";  
                         $html_code .= "         <input type='hidden' name='delete_type' value='player'> ";  
-                        $html_code .= "         <input class='adminButtonDelete' onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
+                        $html_code .= "         <input class='adminButtonDelete' onclick='myFunction()' type='submit' name='submit' value='verwijdren'> " ;
                         $html_code .= "     </form>  ";
 
                         $html_code .= "</div> ";
                     }
 
                     
-
+ 
                 }
 
                 $html_code .=   "</div> ";
  
             }else{
 
-                $html_code .=   "<br> ";
-                $html_code .=   "<h2> Players : ( $players_num ) </h2> ";
+                $html_code .=   "<div class='playersTabel'> ";
+                $html_code .=   "   <br> ";
+                $html_code .=   "   <h2> Spelers : ( $players_num ) </h2> ";
 
-                $html_code .=   " No players yet " ;
+                $html_code .=   "   <p> Geen spelers tot nu </p> " ;
+                $html_code .=   "</div> ";
 
             }
             
@@ -166,7 +169,7 @@ class PlansControl {
                 $html_code .= " <div class='deletBox' > ";
                 $html_code .= "     <form action='' method='POST'> ";  
                 $html_code .= "     <input type='hidden' name='plan_id' value='$plan_id'> ";    
-                $html_code .= "     <input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
+                $html_code .= "     <input onclick='myFunction()' type='submit' name='submit' value='Verwijderen'> " ;
                 $html_code .= "     </form>  ";
                 $html_code .= " </div> ";
 
@@ -257,7 +260,15 @@ class PlansControl {
             $html_code .= "<div class='reservernFormsBox' > ";
             
 
-            $html_code .= "     <h1> Make a plan </h1> <br> "  ;
+            if($opretaion_type == "update" ){
+
+                $html_code .= "     <h1> Bewerk uw plan </h1> <br> "  ;
+
+            }else{
+
+                $html_code .= "     <h1> Maak een plan </h1> <br> "  ;
+
+            }
 
           
 
@@ -291,19 +302,24 @@ class PlansControl {
 
             $players_number = 0;
 
-            while($players_number !=  $max_players ){
 
-                $number       =   strval($players_number);
-                $label_number =   $players_number + 1;
+            if($opretaion_type != "update" ){
 
-                $html_code   .=   " <div class='inputStyle'> ";
-                $html_code   .=   "     <label> Player  $label_number :  </label> ";
-                $html_code   .=   "     <input  type='text' name='player$number'   > " ;
-                $html_code   .=   " </div> ";
+                while($players_number !=  $max_players ){
 
-                $players_number++;
+                    $number       =   strval($players_number);
+                    $label_number =   $players_number + 1;
 
-            }
+                    $html_code   .=   " <div class='inputStyle'> ";
+                    $html_code   .=   "     <label> Player  $label_number :  </label> ";
+                    $html_code   .=   "     <input  type='text' name='player$number'   > " ;
+                    $html_code   .=   " </div> ";
+
+                    $players_number++;
+
+                }
+            
+            }   
 
             $_SESSION["numPlayers"] =   $players_number;
 
@@ -416,12 +432,12 @@ class PlansControl {
 
         $html_code = " ";
         
-        $html_code .= "     <a href='/../../meesterproef/app/views/update_plans.php?id=$id&type=update'> Update </a> "; 
+        $html_code .= "     <a href='/../../meesterproef/app/views/update_plans.php?id=$id&type=update'>Plan updaten </a> "; 
 
         $html_code .= "     <form action='' method='POST'> ";  
         $html_code .= "     <input type='hidden' name='plan_id' value='$id'> ";  
         $html_code .= "     <input type='hidden' name='delete_type' value='plan'> ";
-        $html_code .= "     <input onclick='myFunction()' type='submit' name='submit' value='delete'> " ;
+        $html_code .= "     <input onclick='myFunction()' type='submit' name='submit' value='Plan verwijderen'> " ;
         $html_code .= "     </form>  ";
         
 

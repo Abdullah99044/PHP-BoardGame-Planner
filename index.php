@@ -66,7 +66,7 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
 
                     <input type='hidden' name='filter_off' value='false' >  
 
-                    <input class="filterButtons" class="filteResetButton"   type='submit' value='resest' name'submit' >  
+                    <input class="filterButtons" class="filteResetButton"   type='submit' value='reset data' name'submit' >  
 
                 </form> 
 
@@ -101,10 +101,18 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\filter.cont
             }else{
 
                 
-            if($list_filter  == "No plans"){
+            if($list_filter  == "no plans"){
 
-                echo "No plans";
+                ?>
+
+                <div class='geenPlanBox'> 
+
+                    <p> <? echo "Geen plannen"; ?> </p>
+
+                </div>
                 
+                <?php
+
                 }else{
 
                     foreach(  $list_filter as $value){

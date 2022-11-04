@@ -73,8 +73,9 @@ class FilterModel {
                 return  $plans;
 
             }else{
+ 
 
-                return "No plans";
+                return "no plans";
 
             }
 

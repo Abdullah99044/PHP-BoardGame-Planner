@@ -3,7 +3,25 @@
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\signUp.control.php';
 
-echo SignUp_control::signUp();
+$html_code = " ";
+ 
+if($_SERVER["REQUEST_METHOD"] == "POST" ){
+
+
+    if(!SignUp_control::signUp()){
+ 
+        $html_code .=  "  <div class='loginValid' > ";
+        $html_code .=  "        <h1> Deze informatie is al gebruikt!  </h1> ";  
+        $html_code .=  "  </div> ";
+
+    }else{
+
+        header('Location: /../../meesterproef/app/views/personalPage.php');
+    }
+
+}
+
+ 
  
 ?>
 
@@ -23,6 +41,9 @@ echo SignUp_control::signUp();
 
     <article class="article">
 
+        
+        <?=  $html_code ?>
+        
         <form class="signUpBox" method="POST" action="signUppage.php">
             <input class="SignUpInputText" type="text" name="username" placeholder="Username" required>
             <input class="SignUpInputText" type="text" name="password" placeholder="Password" required>

@@ -202,6 +202,17 @@ nav ul li {
     color: white;
 }
 
+.geenPlanBox{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    text-align: center;
+    font-size: 8vw;
+    color: black;
+}
+
+
 
 /* Login style */
 
@@ -405,6 +416,7 @@ nav ul li {
 }
 
 .personalPageHeaderP{
+    margin-top: 2vw;
     font-size: 2vw;
      
  }
@@ -860,16 +872,22 @@ nav ul li {
     display: inline-block;
   
     width: 100%;
-    margin-left: 28vw;
+   
     margin-right: auto;
     
+}
+
+.zelfToevogenButton p{
+    margin-top: 2vw;
+    text-align: center;
+    font-size: 2vw;
 }
 
 
 .zelfToevogenButton input{
     float: left;
     width: 30%;
-   
+    margin-left: 28vw;
    
     text-align: center;
     color: white;
@@ -1112,6 +1130,117 @@ nav ul li {
 
 }
 
+
+ 
+/* Speler aan een game toevogen */
+
+.spelerToevoegenBox{
+
+    display: block;
+    width: 40%;
+    height: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid purple;
+    border-radius: 40px 40px;
+    background-color: white;
+    box-shadow: 2px 2px 4px black;
+    margin-top: 10vw;
+    
+}
+
+.spelerToevoegen{
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spelerToevoegenInputText{
+    display: inline-block;
+    width: 70%;
+    height: 3vw;
+    border: 1px solid purple;
+    border-radius: 20px 20px;
+    margin-top: 3vw;
+    padding-left: 1vw;
+    font-size: 1.4vw;
+}
+
+.spelerToevoegenInputBox{
+    display: inline-block;
+    width: 25%;
+    height: 3vw;
+    border-color: purple;
+    border-radius: 20px 20px;
+    margin-top: 3vw;
+    margin-left: 0.7vw;
+    background-color: purple;
+    color: white;
+    font-size: 1.4vw;
+    
+}
+
+.spelerToevoegenInputBox:hover{
+    background-color: #CA0CA8;
+}
+
+
+/* Valdition style */
+
+.loginValid{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+    color: red;
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+}
+
+
+/* feedback pagina style */
+
+.feedbackbox{
+    display: block;
+    width: 40%;
+    height: 20vw;
+    margin-top: 1vw;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1vw;
+
+}
+
+.feedbackInputText{
+    display: block;
+    width: 90%;
+    height: 15vw;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 1.5vw;
+}
+
+.feedbackInputButton{
+    display: block;
+    width: 40%;
+    height: 3vw;
+    margin-top: 1vw;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: purple;
+    color: white;
+    border: 1px solid purple;
+    border-radius: 10px 10px;
+    font-size: 1.5vw;
+
+}
+
+
+.feedbackInputButton:hover{
+    border: 1px solid #CA0CA8;
+    background-color: #CA0CA8;
+}   
 </style>
 
  

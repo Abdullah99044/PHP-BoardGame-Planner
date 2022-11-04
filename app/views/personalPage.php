@@ -6,7 +6,7 @@ App::check_login();
 
 UpdateDelete::delete(); 
 
-$name =    $_SESSION["user_name"];
+$name =    $_SESSION["user_name"]; 
 
 ?>
 
@@ -36,9 +36,9 @@ $name =    $_SESSION["user_name"];
         <div class="personalPageHeader">
           
             <div >
-                <h1 class="personalPageHeaderH1" >Welcome  <?php  echo $name; ?></h1>
+                <h1 class="personalPageHeaderH1" >Welkom  <?php  echo $name; ?></h1>
 
-                <p class="personalPageHeaderP">This page will let you edit delete and make your planning!</p>
+                <p class="personalPageHeaderP">U kunt in dit pagina plannen maken en bijwerken</p>
             </div>
 
             <div  >
@@ -60,16 +60,7 @@ $name =    $_SESSION["user_name"];
 
             <?php  
 
-            if(isset( $_POST['logout'])){
-
-                $logout =  $_POST['logout'];
-                App::logout($logout);
-            
-            }else{
-            
-                $logout  = " ";
-            
-            }
+             
             
             $list = PlansControl::readplans("personal" , "admin");
 
@@ -80,6 +71,7 @@ $name =    $_SESSION["user_name"];
                     ?>
 
                     <div class="plansBox"> 
+
                         <?php echo $value; ?>
 
                     </div>
@@ -90,7 +82,19 @@ $name =    $_SESSION["user_name"];
 
                 }else{
 
-                    echo $list;
+                    ?>
+
+                    <div class="geenPlanBox">
+
+
+                        <?=$list; ?>
+
+
+                    </div>
+                    
+
+                    <?php
+                    
                 }
             
             ?>
@@ -106,7 +110,9 @@ $name =    $_SESSION["user_name"];
 
 
     <footer>
+
         <?php require 'pageParts/footer.php'; ?>
+        
     </footer>
 
     

@@ -58,7 +58,7 @@ class Update_Delete_Model {
 
             $full_or_not_full =    JoinPlan_model::join_bolean( $plan_id , $maxPlayers);
 
-            if($full_or_not_full == "not full"){
+            if($full_or_not_full == "Niet vol"){
 
                 $mysqli = App::dataBase();
                 $query = $mysqli->prepare("INSERT INTO players(name , plan_id ) VALUES( ? , ? )");
@@ -81,7 +81,7 @@ class Update_Delete_Model {
 
             }else{
 
-                return " You cant add anymore! because game is full";
+                return " U kunt niet meer spelers toevogen! want uw  plan is vol";
 
             }
 

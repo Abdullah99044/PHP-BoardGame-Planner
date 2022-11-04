@@ -5,8 +5,22 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\update_user
 
 App::check_login();
 
- 
-echo UpdateInfo::emailUpdate();
+$html_code = " ";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    
+
+    $update_email =  UpdateInfo::emailUpdate();
+
+
+    if(!$update_email){
+
+        $html_code .=  "  <div class='loginValid' > ";
+        $html_code .=  "        <h1> Ongildige email  </h1> ";  
+        $html_code .=  "  </div> ";
+
+    }
+}
 
 ?>
 
@@ -28,16 +42,17 @@ echo UpdateInfo::emailUpdate();
 
     <article class="article">
 
+        <?=$html_code; ?>
 
         <form class="updateEmailBox" method="POST" action="">
 
            
-            <input class="updateEmailTextInput" type="text" name="email" placeholder="Write your curnet email" required>
+            <input class="updateEmailTextInput" type="text" name="email" placeholder="Schrijf uw email" required>
             <label><br></label>
 
          
-            <input class="updateEmailTextInput" type="text" name="newEmail" placeholder="Write your new email" required>
-            <input class="updateEmailButton" type="submit" onclick="myFunction()" name="submit" value="update">
+            <input class="updateEmailTextInput" type="text" name="newEmail" placeholder="Schrijf uw nieuwe email" required>
+            <input class="updateEmailButton" type="submit" onclick="myFunction()" name="submit" value="Updaten">
 
 
         </form>

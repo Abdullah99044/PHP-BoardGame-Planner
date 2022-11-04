@@ -3,7 +3,28 @@
 
 require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\controls\login.control.php';
 
-echo Login_control::login();
+$html_code = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST" ){
+    
+
+    $login = Login_control::login();
+
+
+    if(!$login){
+
+        $html_code .=  "  <div class='loginValid' > ";
+        $html_code .=  "        <h1> Aanmelden mislukt! ongeldige gebruikersnaam of wachtwoord  </h1> ";  
+        $html_code .=  "  </div> ";
+                
+    }else{
+
+        header('Location: /../../meesterproef/app/views/personalPage.php');
+        
+    }
+
+     
+}
 
 ?>
 
@@ -11,7 +32,7 @@ echo Login_control::login();
 
 <!DOCTYPE html> 
 <html lang="en">
-<head>
+<head> 
     <?php include 'pageParts/head.php'; ?>
     <title>Login | Meesterproef</title>
 </head>
@@ -28,6 +49,9 @@ echo Login_control::login();
 
 
     <article >
+
+        <?= $html_code  ?>
+
         
         <form class="loginbox" method="POST" action="loginPage.php">
             <input class="loginInputText" type="text" name="username" placeholder="Username"  required>

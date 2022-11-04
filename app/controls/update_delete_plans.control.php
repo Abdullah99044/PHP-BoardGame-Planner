@@ -26,7 +26,7 @@ class UpdateDelete {
              
         }else{
 
-            return "Something wrong";
+            return "Iets fout";
         }
 
       
@@ -56,7 +56,7 @@ class UpdateDelete {
 
             }else{
 
-                return "Something wrong";
+                return "Iets fout";
             }
 
         }
@@ -91,7 +91,7 @@ class UpdateDelete {
             
             }else{
 
-                return "Something wrong";
+                return "Iets fout";
             }
         }
     }

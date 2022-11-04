@@ -5,7 +5,7 @@ require 'C:\Program Files\ammps2\Ampps\www\meesterproef\app\models\app.model.php
  
 class Signup_model {
 
-    public static function signUp($userName , $email , $passWord){    
+    public static function signUp($userName , $email){    
 
         if(App::check_connection()){  
 
@@ -28,30 +28,13 @@ class Signup_model {
 
                 if($count == 1 ){
 
-                    return "This informations already exist";
-                
+                    return true;
+  
+                }else{ 
 
-                }else{
- 
-                    $query_1    =    $mysqli->prepare("INSERT INTO user(username , password , email) VALUES ( ? , ? , ?)");
-                    $result_1   =    App::prepare_method(3 , $query_1 , "sss" , $userName , $passWord , $email );
-                     
-                    if($result_1){
-
-
-                        $query_1->close();
-                        $result_1->close();
-                        $mysqli->close();
-
-                        $_SESSION["user_name"] = $userName; 
-                        return header('Location: /../../meesterproef/app/views/personalPage.php');
- 
-                    }else{
-
-                        return die('Query faild!!!' .  mysqli_error(App::dataBase()));
-
-
-                    }     
+                    
+                    return false;
+                       
                 }
 
          
@@ -62,6 +45,24 @@ class Signup_model {
                 
             }
         }
+    }
+
+
+    public static function insert_singUp_data($userName , $email , $passWord){
+
+        $mysqli     =   App::dataBase();
+        $query      =    $mysqli->prepare("INSERT INTO user(username , password , email) VALUES ( ? , ? , ?)");
+        App::prepare_method(3 , $query , "sss" , $userName , $passWord , $email );
+        
+        $query->close();
+        $mysqli->close();
+
+
+        $_SESSION["user_name"] = $userName;  
+        $_SESSION["isLogged"] = TRUE;
+
+        return;
+ 
     }
 }
 

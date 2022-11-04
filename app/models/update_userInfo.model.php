@@ -47,7 +47,7 @@ class UpdateInfo_MO {
     
                 }else{
     
-                    return  "<h1>  Invalid  password.</h1>";  
+                    return  false;  
     
                 }
     
@@ -115,9 +115,9 @@ class UpdateInfo_MO {
 
             }else{
 
-                return  "<h1>  Invalid   email </h1>";  
+                return  false;  
 
-            }
+            } 
 
         }else{
 

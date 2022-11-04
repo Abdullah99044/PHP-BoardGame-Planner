@@ -72,9 +72,9 @@ class JoinPlan_model {
     public static function join_bolean($plan_id , $max_players ){
 
         if($max_players  == App::read_how_many_players_in_plan($plan_id)){
-            return "full";
+            return "Vol";
         }else{
-            return "not full";
+            return "Niet vol";
         }
          
 
